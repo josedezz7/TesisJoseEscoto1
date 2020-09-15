@@ -120,7 +120,6 @@ C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\es\Microsoft.
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\es\Microsoft.Owin.Security.Google.resources.dll
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\obj\Debug\Ecommerce.csprojAssemblyReference.cache
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\obj\Debug\Ecommerce.csproj.CoreCompileInputs.cache
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\obj\Debug\Ecommerce.csproj.CopyComplete
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\obj\Debug\Ecommerce.dll

@@ -1,5 +1,7 @@
 ﻿using Ecommerce.DAL;
+using Ecommerce.Models;
 using Ecommerce.Repository;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,5 +24,26 @@ namespace Ecommerce.Controllers
             List<Tbl_Category> allcategories = _unitOfWork.GetRepositoryInstance<Tbl_Category>().GetAllRecordsIQueryable().Where(i => i.IsDelete == false).ToList();
             return View(allcategories);
         }
+
+        public ActionResult AddCategory()
+        {
+            return UpdateCategory(0);
+        }
+
+        public ActionResult UpdateCategory(int categoryId)
+        {
+            CategoryDetail cd;
+                if(categoryId != null)
+            {
+                cd = JsonConvert.DeserializeObject<CategoryDetail>(JsonConvert.SerializeObject(_unitOfWork.GetRepositoryInstance<Tbl_Category>().getFirstorDefault(categoryId)));
+            }
+                else
+            {
+                cd = new CategoryDetail();
+            }
+            return View("UpdateCategory", cd);
+        }
+
+        
     }
 }

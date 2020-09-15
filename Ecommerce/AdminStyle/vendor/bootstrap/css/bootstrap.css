@@ -248,6 +248,10 @@ button:focus {
 .pull-right{
     float:right !important;
 }
+
+.pull-right{
+    float:right !important;
+}
 input,
 button,
 select,
