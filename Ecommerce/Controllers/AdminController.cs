@@ -44,6 +44,36 @@ namespace Ecommerce.Controllers
             return View("UpdateCategory", cd);
         }
 
-        
+        public ActionResult Product()
+        {
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Product>().GetProduct());
+        }
+
+        public ActionResult ProductEdit(int productId)
+        {
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Product>().getFirstorDefault(productId));
+        }
+        [HttpPost]
+        public ActionResult ProductEdit(Tbl_Product tbl)
+        {
+            _unitOfWork.GetRepositoryInstance<Tbl_Product>().Update(tbl);
+            return RedirectToAction("Product");
+        }
+
+        public ActionResult ProductAdd()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ProductAdd(Tbl_Product tbl)
+        {
+            _unitOfWork.GetRepositoryInstance<Tbl_Product>().Add(tbl);
+            return RedirectToAction("Product");
+        }
+
+
+
+
     }
 }

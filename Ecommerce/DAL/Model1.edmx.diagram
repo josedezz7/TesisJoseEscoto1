@@ -10,14 +10,14 @@
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Category" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_MemberRole" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Members" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Roles" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_ShippingDetails" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_SlideImage" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
-        <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Cart__Produc__38996AB5" ManuallyRouted="false" />
-        <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Produ__Categ__286302EC" ManuallyRouted="false" />
         <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Shipp__Membe__30F848ED" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Product" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Cart__Produc__38996AB5" />
+        <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Produ__Categ__286302EC" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

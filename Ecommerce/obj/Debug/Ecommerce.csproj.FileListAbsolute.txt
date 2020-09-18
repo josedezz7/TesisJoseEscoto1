@@ -124,3 +124,4 @@ C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\obj\Debug\Ecommer
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\obj\Debug\Ecommerce.csproj.CopyComplete
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\obj\Debug\Ecommerce.dll
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\obj\Debug\Ecommerce.pdb
+C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\obj\Debug\Ecommerce.csprojAssemblyReference.cache
