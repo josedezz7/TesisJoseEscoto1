@@ -43,12 +43,15 @@
                         @foreach (var item in Model)
                         {
 
-                            <tr>
-                                <td>@(Model.IndexOf(item)+1)</td>
-                                <td>@item.CategoryName</td>
-                                <td><a href="#">Editar</a></td>
+                        <tr>
+                            <td>@(Model.IndexOf(item)+1)</td>
+                            <td>@item.CategoryName</td>
+                            <td>
+                                @Html.ActionLink("Edit", "CategoryEdit", new { catId = item.CategoryId })
+                            </td>
+                            
 
-                            </tr>
+                        </tr>
                         }
 
                     </tbody>

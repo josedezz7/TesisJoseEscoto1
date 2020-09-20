@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Ecommerce.Models.Home.HomeIndexViewModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -64,17 +66,40 @@
 </div>
 
 <div class="row product-container">
-    <div class="col-md-3" col-sm-3 col-xs-6 style="margin-bottom:8px">
-        <div class="thumbnail product-item" style="height:300px">
-            <img class="img-responsive" title="Clic para ver Detalle de Producto"
-                 style="cursor:pointer;height:160px;width:100%"
-                 src="~/Images/Nintendo64.jpg" />
-            <div class="caption">
-                <h5>Nombre de Producto</h5>
-                <p>999.99 HNL</p>
-                <p>Disponible</p>
-                <div class="product-item-badge">Nuevo</div>
+    @foreach (var item in Model.ListOfProducts)
+    {
+        <div class="col-md-3" col-sm-3 col-xs-6 style="margin-bottom:8px">
+            <div class="thumbnail product-item" style="height:300px">
+                <img class="img-responsive" title="Clic para ver Detalle de Producto"
+                     style="cursor:pointer;height:160px;width:100%"
+                     src="~/ProductImages/@item.ProductImage" />
+                <div class="caption">
+                    <h5>@item.ProductName</h5>
+                    <p>@item.Price HNL</p>
+                    <p>
+                        @if (item.Quantity > 0)
+                        {
+                            <p>Disponible</p>
+                        }
+                        else
+                        {
+                            <p>No Disponible</p>
+                        }
+                    </p>
+                <div class="product-item-badge">
+                    @if (item.IsFeatured == true)
+                    {
+                        <p>Nuevo Producto</p>
+                    }
+                    else
+                    {
+                        <p>Producto</p>
+                    }
+                </div>
+                    </div>
             </div>
         </div>
-    </div>
+
+    }
+
 </div>

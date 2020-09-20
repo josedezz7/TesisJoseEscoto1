@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
+using Ecommerce.DAL;
+using Ecommerce.Models;
+using Ecommerce.Repository;
+using Ecommerce.Models.Home;
 
 namespace Ecommerce.Controllers
 {
@@ -10,7 +15,8 @@ namespace Ecommerce.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            HomeIndexViewModel model = new HomeIndexViewModel();
+            return View(model.CreateModel());
         }
 
         public ActionResult About()
