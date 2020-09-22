@@ -1,51 +1,52 @@
 ﻿@model Ecommerce.Models.Home.HomeIndexViewModel
-
+@using PagedList;
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Home Page";
 }
 
-    <div id="themeSlider" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#themeSlider" data-slide-to="0" class="active"></li>
-            <li data-target="#themeSlider" data-slide-to="1"></li>
-            <li data-target="#themeSlider" data-slide-to="2"></li>
-        </ol>
+<div id="themeSlider" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#themeSlider" data-slide-to="0" class="active"></li>
+        <li data-target="#themeSlider" data-slide-to="1"></li>
+        <li data-target="#themeSlider" data-slide-to="2"></li>
+    </ol>
 
-        <div class="carousel-inner">
-            <div class="item active">
-                <div class="imgOverlay"></div>
-                <img style="height:320px;width:100%" src="../Images/photo5382142781725715700.jpg" alt="First slide">
-                <div class="carousel-caption">
-                    <h3>First slide</h3>
-                    <p>Siente la Emocion</p>
-                </div>
-            </div>
-            <div class="item">
-                <div class="imgOverlay"></div>
-                <img style="height:320px;width:100%" src="../Images/photo5764775542611095281.jpg" alt="Second slide">
-                <div class="carousel-caption">
-                    <h3>Second slide</h3>
-                    <p>Vive la Emocion</p>
-                </div>
-            </div>
-            <div class="item">
-                <div class="imgOverlay"></div>
-                <img style="height:320px;width:100%" src="../Images/photo5773788737640181467.jpg" alt="Third slide">
-                <div class="carousel-caption">
-                    <h3>Third slide</h3>
-                    <p>Pronto, tu mejor opcion...0501... Esperalo</p>
-                </div>
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="imgOverlay"></div>
+            <img style="height:320px;width:100%" src="../Images/play wallpapaer.jpg" alt="First slide">
+            <div class="carousel-caption">
+                <h3>First slide</h3>
+                <p>Siente la Emocion</p>
             </div>
         </div>
-
-        <a class="left carousel-control" href="#themeSlider" data-slide="prev">
-            <span class="fa fa-chevron-left"></span>
-        </a>
-        <a class="right carousel-control" href="#themeSlider" data-slide="next">
-            <span class="fa fa-chevron-right"></span>
-        </a>
-
+        <div class="item">
+            <div class="imgOverlay"></div>
+            <img style="height:320px;width:100%" src="../Images/play_wallpaper2.jpg" alt="Second slide">
+            <div class="carousel-caption">
+                <h3>Second slide</h3>
+                <p>Vive la Emocion</p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="imgOverlay"></div>
+            <img style="height:320px;width:100%" src="../Images/samsung_walpaper.jpg" alt="Third slide">
+            <div class="carousel-caption">
+                <h3>Third slide</h3>
+                <p>Pronto, tu mejor opcion...0501... Esperalo</p>
+            </div>
+        </div>
     </div>
+
+    <a class="left carousel-control" href="#themeSlider" data-slide="prev">
+        <span class="fa fa-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#themeSlider" data-slide="next">
+        <span class="fa fa-chevron-right"></span>
+    </a>
+
+</div>
 
 <div class="olContent f1"><h2 style="color:black">Buscar Producto/Categoria</h2></div>
 <form method="post">
@@ -82,27 +83,32 @@
                     <p>
                         @if (item.Quantity > 0)
                         {
-                            <p>Disponible</p>
-                        }
-                        else
-                        {
-                            <p>No Disponible</p>
-                        }
-                    </p>
-                <div class="product-item-badge">
-                    @if (item.IsFeatured == true)
-                    {
-                        <p>Nuevo Producto</p>
+                        <p>Disponible</p>
                     }
                     else
                     {
-                        <p>Producto</p>
+                        <p>No Disponible</p>
                     }
-                </div>
+                        </p>
+                        <div class="product-item-badge">
+                            @if (item.IsFeatured == true)
+                            {
+                                <p>Nuevo Producto</p>
+                            }
+                            else
+                            {
+                                <p>Producto</p>
+                            }
+                        </div>
                     </div>
+                </div>
             </div>
-        </div>
 
-    }
+        }
 
 </div>
+<div class="container">
+    @Html.PagedListPager(Model.ListOfProducts, page => Url.Action("Index", new { page, search = Request.QueryString["search"] }))
+</div>
+
+<!--, new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded, DisplayItemSliceAndTotal = true }-->
