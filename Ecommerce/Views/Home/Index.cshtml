@@ -17,7 +17,7 @@
             <div class="imgOverlay"></div>
             <img style="height:320px;width:100%" src="../Images/play wallpapaer.jpg" alt="First slide">
             <div class="carousel-caption">
-                <h3>First slide</h3>
+                <h3></h3>
                 <p>Siente la Emocion</p>
             </div>
         </div>
@@ -25,7 +25,7 @@
             <div class="imgOverlay"></div>
             <img style="height:320px;width:100%" src="../Images/play_wallpaper2.jpg" alt="Second slide">
             <div class="carousel-caption">
-                <h3>Second slide</h3>
+                <h3></h3>
                 <p>Vive la Emocion</p>
             </div>
         </div>
@@ -33,7 +33,7 @@
             <div class="imgOverlay"></div>
             <img style="height:320px;width:100%" src="../Images/samsung_walpaper.jpg" alt="Third slide">
             <div class="carousel-caption">
-                <h3>Third slide</h3>
+                <h3></h3>
                 <p>Pronto, tu mejor opcion...0501... Esperalo</p>
             </div>
         </div>
@@ -83,12 +83,17 @@
                     <p>
                         @if (item.Quantity > 0)
                         {
-                        <p>Disponible</p>
-                    }
-                    else
-                    {
-                        <p>No Disponible</p>
-                    }
+                            using (Html.BeginForm("AddToCart", "Home", new { productId = item.ProductId, FormMethod.Post }))
+                            {
+                                <button tupe="submit" class="pull-right"><i class="fa fa-shopping-cart"></i></button>
+                            }
+
+                            <p>Disponible</p>
+                        }
+                        else
+                        {
+                            <p>No Disponible</p>
+                        }
                         </p>
                         <div class="product-item-badge">
                             @if (item.IsFeatured == true)

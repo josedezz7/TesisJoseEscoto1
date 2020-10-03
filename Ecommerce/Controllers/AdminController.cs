@@ -45,6 +45,7 @@ namespace Ecommerce.Controllers
         public ActionResult UpdateCategory(int categoryId)
         {
             CategoryDetail cd;
+
                 if(categoryId != null)
             {
                 cd = JsonConvert.DeserializeObject<CategoryDetail>(JsonConvert.SerializeObject(_unitOfWork.GetRepositoryInstance<Tbl_Category>().getFirstorDefault(categoryId)));
