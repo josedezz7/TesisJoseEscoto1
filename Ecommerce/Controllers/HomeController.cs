@@ -20,9 +20,47 @@ namespace Ecommerce.Controllers
             return View(model.CreateModel(search, 4, page));
         }
 
-        public ActionResult AddToCart(int productId)
+        public ActionResult Checkout()
         {
-            if(Session["cart"] == null)
+            return View();
+        }
+
+        public ActionResult CheckoutDetails()
+        {
+            return View();
+        }
+
+        public ActionResult DecreaseQty(int productId)
+        {
+            if (Session["cart"] != null)
+            {
+                List<Item> cart = (List<Item>)Session["cart"];
+                var product = ctx.Tbl_Product.Find(productId);
+                foreach (var item in cart)
+                {
+                    if (item.Product.ProductId == productId)
+                    {
+                        int prevQty = item.Quantity;
+                        if (prevQty > 0)
+                        {
+                            cart.Remove(item);
+                            cart.Add(new Item()
+                            {
+                                Product = product,
+                                Quantity = prevQty - 1
+                            });
+                        }
+                        break;
+                    }
+                }
+                Session["cart"] = cart;
+            }
+            return Redirect("Checkout");
+        }
+
+        public ActionResult AddToCart(int productId, string url)
+        {
+            if (Session["cart"] == null)
             {
                 List<Item> cart = new List<Item>();
                 var product = ctx.Tbl_Product.Find(productId);
@@ -36,49 +74,52 @@ namespace Ecommerce.Controllers
             else
             {
                 List<Item> cart = (List<Item>)Session["cart"];
+                var count = cart.Count();
                 var product = ctx.Tbl_Product.Find(productId);
-                foreach (var item in cart)
+                for (int i = 0; i < count; i++)
                 {
-                    if(item.Product.ProductId == productId)
+                    if (cart[i].Product.ProductId == productId)
                     {
-                        int prevQty = item.Quantity;
-                        cart.Remove(item);
+                        int prevQty = cart[i].Quantity;
+                        cart.Remove(cart[i]);
                         cart.Add(new Item()
                         {
                             Product = product,
                             Quantity = prevQty + 1
-                        }); 
+                        });
                         break;
                     }
                     else
                     {
-                        cart.Add(new Item()
+                        var prd = cart.Where(x => x.Product.ProductId == productId).SingleOrDefault();
+                        if (prd == null)
                         {
-                            Product = product,
-                            Quantity = 1
-                        });
+                            cart.Add(new Item()
+                            {
+                                Product = product,
+                                Quantity = 1
+                            });
+                        }
                     }
                 }
-                
                 Session["cart"] = cart;
             }
-            return Redirect("Index");
+            return Redirect(url);
         }
-
-        public ActionResult RemoveFromCart(int productId)
-        {
-            List<Item> cart = (List<Item>)Session["cart"];
-            foreach (var item in cart)
+            public ActionResult RemoveFromCart(int productId)
             {
-                if(item.Product.ProductId==productId)
+                List<Item> cart = (List<Item>)Session["cart"];
+                foreach (var item in cart)
                 {
-                    cart.Remove(item);
-                    break;
+                    if (item.Product.ProductId == productId)
+                    {
+                        cart.Remove(item);
+                        break;
+                    }
                 }
-            }    
-            Session["cart"] = cart;
-            return Redirect("Index");
-        }
+                Session["cart"] = cart;
+                return Redirect("Index");
+            }
 
-    }
+        }
 }
