@@ -129,3 +129,5 @@ C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\PagedList.dll
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\PagedList.Mvc.dll
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\PagedList.xml
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\PagedList.Mvc.xml
+C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\PayPal.dll
+C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\PayPal.xml
