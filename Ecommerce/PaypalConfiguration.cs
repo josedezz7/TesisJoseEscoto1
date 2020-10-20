@@ -1,4 +1,4 @@
-﻿using PayPal.Api;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,16 +18,16 @@ namespace Ecommerce
             clientSecret = "EGZvB5Q8B8gAEZcQLeqhnLjoXqOQc2ZVCYhXqma0eWAcIPgUDlWdJp7sPCoefYvmaThVHGEYBZqIYyhe";
         }
 
-        private static Dictionary<string, string> getconfig()
+        /*private static Dictionary<string, string> getconfig()
         {
             return PayPal.Api.ConfigManager.Instance.GetProperties();
-        }
+        }*/
 
-        private static string GetAccessToken()
+        /*private static string GetAccessToken()
         {
             string accessToken = new OAuthTokenCredential(clientId, clientSecret, getconfig()).GetAccessToken();
             return accessToken;
-        }
+        }*/
 
         public static APIContext GetAPIContext()
         {
@@ -35,5 +35,7 @@ namespace Ecommerce
             apicontext.Config = getconfig();
             return apicontext;
         }
+
+
     }
 }

@@ -1,3 +1,4 @@
+C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\obj\Debug\Ecommerce.csproj.CoreCompileInputs.cache
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\Ecommerce.dll.config
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\Ecommerce.dll
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\Ecommerce.pdb
@@ -69,6 +70,10 @@ C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\Microsoft.Owi
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\Newtonsoft.Json.dll
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\Owin.dll
+C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\PagedList.dll
+C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\PagedList.Mvc.dll
+C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\PayPalCheckoutSdk.dll
+C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\PayPalHttp-Dotnet.dll
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\System.Web.Helpers.dll
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\System.Web.Mvc.dll
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\System.Web.Optimization.dll
@@ -77,6 +82,8 @@ C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\System.Web.We
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\System.Web.WebPages.dll
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\System.Web.WebPages.Razor.dll
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\WebGrease.dll
+C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\PagedList.xml
+C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\PagedList.Mvc.xml
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\System.Web.Helpers.xml
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\System.Web.Mvc.xml
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\System.Web.Optimization.xml
@@ -120,14 +127,7 @@ C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\es\Microsoft.
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\es\Microsoft.Owin.Security.Google.resources.dll
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\obj\Debug\Ecommerce.csproj.CoreCompileInputs.cache
+C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\obj\Debug\Ecommerce.csprojAssemblyReference.cache
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\obj\Debug\Ecommerce.csproj.CopyComplete
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\obj\Debug\Ecommerce.dll
 C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\obj\Debug\Ecommerce.pdb
-C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\obj\Debug\Ecommerce.csprojAssemblyReference.cache
-C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\PagedList.dll
-C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\PagedList.Mvc.dll
-C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\PagedList.xml
-C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\PagedList.Mvc.xml
-C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\PayPal.dll
-C:\Users\josedezc7\Documents\GitHub\TesisJoseEscoto1\Ecommerce\bin\PayPal.xml
