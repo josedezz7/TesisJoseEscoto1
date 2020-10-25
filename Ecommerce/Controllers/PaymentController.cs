@@ -2,7 +2,9 @@
 using PayPalCheckoutSdk.Orders;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,36 +12,43 @@ namespace Ecommerce.Controllers
 {
     public class PaymentController : Controller
     {
-        // GET: Payment
-        /*public ActionResult PaymentWithPaypal()
+        [HttpGet]
+        [Route("Payment/PaypalPagoExitoso/{token}/{PayerID}")]
+        public async Task<ActionResult> PaypalPagoExitoso(string token, string PayerID)
         {
-            APIContext apicontext = PaypalConfiguration.GetAPIContext();
+            return View("SuccessView");
+        }
+        // GET: Payment
+        [HttpGet]
+        public async Task<ActionResult> PaymentWithPaypal()
+        {
             try
             {
                 string PayerId = Request.Params["PayerID"];
-                
+
                 if (string.IsNullOrEmpty(PayerId))
                 {
                     string baseURi = Request.Url.Scheme + "://" + Request.Url.Authority +
-                        "PaymentWithPaypal/PaymentWithPaypal?";
+                        "Payment/PaymentWithPaypal?";
 
                     var Guid = Convert.ToString((new Random()).Next(100000000));
-                    var createPayment = this.CreatePaymentAsync( baseURi + "guid=" + Guid);
+                    var createPayment = await this.CreatePaymentAsync();
 
-                    var links = createPayment.links.GetEnumerator();
+                    var links = createPayment.Links.GetEnumerator();
                     string paypalRedirectURL = null;
 
                     while (links.MoveNext())
                     {
-                        Links lnk = links.Current;
-
-                        if (lnk.rel.ToLower().Trim().Equals("approval_url"))
+                        LinkDescription lnk = links.Current;
+                        Debug.WriteLine(lnk.Rel, lnk.Href);
+                        if (lnk.Rel.ToLower().Trim().Equals("approve"))
                         {
-                            paypalRedirectURL = lnk.href;
+                            paypalRedirectURL = lnk.Href;
+                            return Redirect(paypalRedirectURL);
                         }
                     }
                 }
-                else
+                /*else
                 {
                     var guid = Request.Params["guid"];
                     var executePaymnt = ExecutePayment(apicontext, PayerId, Session[guid] as string);
@@ -48,10 +57,11 @@ namespace Ecommerce.Controllers
                     {
                         return View("FailureView");
                     }
-                }
+                }*/
             }
             catch (Exception e)
             {
+                Debug.WriteLine(e);
                 return View("FailureView");
                 //throw;
             }
@@ -59,18 +69,38 @@ namespace Ecommerce.Controllers
             return View("SuccessView");
         }
 
-        private object ExecutePayment( string payerId, string PaymentId)
-        {
-            var paymentExecution = new PaymentExecution() { payer_id = payerId };
+        /* private object ExecutePayment(string payerId, string PaymentId)
+         {
+             var paymentExecution = new PaymentExecution() { payer_id = payerId };
              this.payment = new Payment() { id = PaymentId };
              return this.payment.Execute(apicontext, paymentExecution);
-    }*/
-
-
-        private async System.Threading.Tasks.Task CreatePaymentAsync( string redirectURl)
+         }
+ */
+       /* public async Task<PayPalHttp.HttpResponse> PaypalPagoExitoso()
         {
+            var request = new OrdersCaptureRequest("APPROVED-ORDER-ID");
+            request.RequestBody(new OrderActionRequest());
+            PayPalHttp.HttpResponse response = await PaypalClient.client().Execute(request);
+            var statusCode = response.StatusCode;
+            Order result = response.Result<Order>();
+            Console.WriteLine("Status: {0}", result.Status);
+            Console.WriteLine("Capture Id: {0}", result.Id);
+            return response;
 
-            HttpResponse response;
+        }*/
+        public async Task<ActionResult> PaypalPagoFallido()
+        {
+            
+            return View("FailureView");
+        }
+        
+       
+        private async Task<Order> CreatePaymentAsync()
+        {
+            decimal total = 0;
+            string baseURi = Request.Url.Scheme + "://" + Request.Url.Authority +
+                       "/Payment/";
+            PayPalHttp.HttpResponse response;
             //PaypalClient client = new PaypalClient();
             var ItemLIst = new List<PayPalCheckoutSdk.Orders.Item>();
 
@@ -79,6 +109,7 @@ namespace Ecommerce.Controllers
                 List<Models.Home.Item> cart = (List<Models.Home.Item>)(Session["cart"]);
                 foreach (var item in cart)
                 {
+                    total += ((item.Product.Price * item.Product.Quantity) ?? 0);
                     ItemLIst.Add(new PayPalCheckoutSdk.Orders.Item()
                     {
                         Description = "Descripcion",
@@ -99,23 +130,31 @@ namespace Ecommerce.Controllers
                         AmountWithBreakdown = new AmountWithBreakdown()
                         {
                             CurrencyCode = "USD",
-                            Value = "100.00"
+                            Value = total.ToString(),
+                            AmountBreakdown = new AmountBreakdown(){
+
+                             ItemTotal = new Money
+                                {
+                                    CurrencyCode = "USD",
+                                    Value = total.ToString()
+                                },
+                            },
                         }, Items = ItemLIst
                     }
                 },
                     ApplicationContext = new ApplicationContext()
                     {
-                        ReturnUrl = redirectURl + "&Cancel=true",
-                        CancelUrl = redirectURl
+                        ReturnUrl = baseURi + "PaypalPagoExitoso",
+                        CancelUrl = baseURi + "PaypalPagoFallido"
                     }
                 };
 
-                //var request = new OrdersCreateRequest();
-                //request.Prefer("return=representation");
-                //request.RequestBody(order);
-                //response = await PaypalClient.client().Execute(request);
-                //var statusCode = response.StatusCode;
-                //Order result = response.Result<Order>();
+                var request = new OrdersCreateRequest();
+                request.Prefer("return=representation");
+                request.RequestBody(order);
+                response = await PaypalClient.client().Execute(request);
+                var statusCode = response.StatusCode;
+                return response.Result<Order>();
 
                 /*
                 var payer = new Payer() { payment_method = "paypal" };
@@ -158,13 +197,13 @@ namespace Ecommerce.Controllers
                 };
                 */
             }
-
+            return null;
             /*return this.payment.Create(apicontext);*/
 
 
         }
 
-        
+
 
     }
 }
