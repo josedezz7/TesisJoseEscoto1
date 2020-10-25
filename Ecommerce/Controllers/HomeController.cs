@@ -13,7 +13,7 @@ namespace Ecommerce.Controllers
 {
     public class HomeController : Controller
     {
-        dbEcommerceEntities ctx = new dbEcommerceEntities();
+        dbEcommerceEntities1 ctx = new dbEcommerceEntities1();
         public ActionResult Index(string search, int? page)
         {
             HomeIndexViewModel model = new HomeIndexViewModel();

@@ -4,20 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6c514a61a6cb49828daab499fba74cbd" Name="Diagram1">
+      <Diagram DiagramId="2085b315366e4323a7df2f11c0c0fea1" Name="Diagram1">
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Cart" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_CartStatus" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Category" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_MemberRole" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Members" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Roles" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_ShippingDetails" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_SlideImage" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
+        <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Cart__Produc__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Produ__Categ__286302EC" ManuallyRouted="false" />
         <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Shipp__Membe__30F848ED" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Product" Width="1.5" PointX="3" PointY="1" />
-        <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Cart__Produc__38996AB5" />
-        <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Produ__Categ__286302EC" />
-        </Diagram>
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -14,7 +14,7 @@ namespace Ecommerce.Models.Home
     public class HomeIndexViewModel
     {
         public GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
-        dbEcommerceEntities context = new dbEcommerceEntities();
+        dbEcommerceEntities1 context = new dbEcommerceEntities1();
         public IPagedList<Tbl_Product> ListOfProducts { get; set; }
         public HomeIndexViewModel CreateModel(string search, int pageSize, int? page)
         {

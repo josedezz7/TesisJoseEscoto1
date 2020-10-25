@@ -11,9 +11,9 @@ namespace Ecommerce.Repository
     public class GenericRepository<Tbl_Entity> : IRepository<Tbl_Entity> where Tbl_Entity : class
     {
         DbSet<Tbl_Entity> _dbSet;
-        private dbEcommerceEntities _DBEntity;
+        private dbEcommerceEntities1 _DBEntity;
 
-        public GenericRepository(dbEcommerceEntities DBEntity)
+        public GenericRepository(dbEcommerceEntities1 DBEntity)
         {
             _DBEntity = DBEntity;
             _dbSet = _DBEntity.Set<Tbl_Entity>();
