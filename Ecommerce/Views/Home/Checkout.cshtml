@@ -60,19 +60,28 @@ else
                                     </td>
                                 </tr>
                             }
+                            @{
+                                decimal? subtotal = 0;
+                                foreach (Item item in (List<Item>)Session["cart"])
+                                {
+                                    
+                                        subtotal = subtotal + item.Product.Price;
+                                    }
 
-                            <tr>
-                                <td colspan="2"></td>
-                                <td class="font-weight-bolder font-size-h4 text-right">Subtotal</td>
-                                <td class="font-weight-bolder font-size-h4 text-right">$1538.00</td>
-                            </tr>
-                            <tr>
-                                <td colspan="4" class="border-0 text-right pt-10">
-                                    <a class="btn btn-success font-weight-bolder px-8" href="@Url.Action("CheckoutDetails","Home")">Procesar Orden</a>
-                                </td>
-                            </tr>
-                            <!--end::Cart Footer-->
-                        </tbody>
+                                    <tr>
+                                        <td colspan="2"></td>
+                                        <td class="font-weight-bolder font-size-h4 text-right">Subtotal</td>
+                                        <td class="font-weight-bolder font-size-h4 text-right">Lps. @subtotal</td>
+                                    </tr>
+                                }
+
+                                <tr>
+                                    <td colspan="4" class="border-0 text-right pt-10">
+                                        <a class="btn btn-success font-weight-bolder px-8" href="@Url.Action("CheckoutDetails","Home")">Procesar Orden</a>
+                                    </td>
+                                </tr>
+                                <!--end::Cart Footer-->
+                            </tbody>
                     </table>
                 </div>
                 <!--end::Shopping Cart-->
