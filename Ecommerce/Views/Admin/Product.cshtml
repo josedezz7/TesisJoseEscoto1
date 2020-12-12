@@ -32,19 +32,21 @@
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach (var item in Model)
-                    {
-                        int count = 1;
-                        <tr>
-                            <td>@count</td>
-                            <td>@item.ProductName</td>
-                            <td>
-                                @Html.ActionLink("Edit", "ProductEdit", new { productId = item.ProductId })
-                            </td>
-                           
+                    @{int count = 1;
 
-                        </tr>
-                        count++;
+                        foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>@count</td>
+                                <td>@item.ProductName</td>
+                                <td>
+                                    @Html.ActionLink("Edit", "ProductEdit", new { productId = item.ProductId })
+                                </td>
+                            </tr>
+                            count++;
+                        }
+
                     }
 
                 </tbody>
