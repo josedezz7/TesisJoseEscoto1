@@ -23,7 +23,7 @@ else
                 </h3>
                 <div class="card-toolbar">
                     <div class="dropdown dropdown-inline">
-                        <a href="#" class="btn btn-primary font-weight-bolder font-size-sm">Continue Shopping</a>
+                        <a href="/" class="btn btn-primary font-weight-bolder font-size-sm">Continuar comprando</a>
                     </div>
                 </div>
             </div>
@@ -64,9 +64,9 @@ else
                                 decimal? subtotal = 0;
                                 foreach (Item item in (List<Item>)Session["cart"])
                                 {
-                                    
-                                        subtotal = subtotal + item.Product.Price;
-                                    }
+                                    decimal? precio = item.Product.Price * item.Quantity;
+                                    subtotal = subtotal + precio;
+                                }
 
                                     <tr>
                                         <td colspan="2"></td>

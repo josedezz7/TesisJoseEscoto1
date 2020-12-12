@@ -65,6 +65,15 @@
                                             </g>
                                         </svg><!--end::Svg Icon-->
                                     </span>
+                                    @if (Session["cart"] != null)
+                                    {
+                                        int itemCount = 0;
+                                        foreach (Item item in (List<Item>)Session["cart"])
+                                        {
+                                            itemCount += item.Quantity;
+                                        }
+                                        <span class="label label-sm label-danger">@itemCount</span>
+                                    }
 
                                 </div>
                             </div>
