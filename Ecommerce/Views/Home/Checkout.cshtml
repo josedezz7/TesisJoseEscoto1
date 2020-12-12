@@ -3,45 +3,82 @@
     ViewBag.Title = "Checkout";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Checkout</h2>
+<br />
 
 @if (Session["cart"] == null)
 {
-    <div class="alert alert-danger">
+    <div class="alert alert-custom alert-warning fade show mb-5">
         <strong>No hay Producto agregado al carrito!</strong>
     </div>
-
 }
 else
 {
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Agregar</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (Item item in (List<Item>)Session["cart"])
-            {
-                <tr>
-                    <td>@item.Product.ProductName</td>
-                    <td>@item.Quantity</td>
-                    <td>
-                        <a href="@Url.Action("AddToCart", "Home", new { productId = item.Product.ProductId, url="Checkout" })">
-                            <i class="fa fa-plus"></i>
-                        </a>
-                        <a href="@Url.Action("DecreaseQty", "Home", new { productId = item.Product.ProductId })">
-                            <i class="fa fa-minus"></i>
-                        </a>
-                    </td>
-                </tr>
-            }
+    <div class="flex-row-fluid ml-lg-8">
+        <!--begin::Section-->
+        <div class="card card-custom gutter-b">
+            <!--begin::Header-->
+            <div class="card-header flex-wrap border-0 pt-6 pb-0">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label font-weight-bolder font-size-h3 text-dark">Mi carrito</span>
+                </h3>
+                <div class="card-toolbar">
+                    <div class="dropdown dropdown-inline">
+                        <a href="#" class="btn btn-primary font-weight-bolder font-size-sm">Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+            <!--end::Header-->
+            <div class="card-body">
+                <!--begin::Shopping Cart-->
+                <div class="table-responsive">
+                    <table class="table">
+                        <!--begin::Cart Header-->
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th class="text-right">Cantidad</th>
+                                <th class="text-right">Precio</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <!--end::Cart Header-->
 
-        </tbody>
-    </table>
-    <a class="btn btn-success" href="@Url.Action("CheckoutDetails","Home")">Procesar Orden >></a>
+                        <tbody>
+                            @foreach (Item item in (List<Item>)Session["cart"])
+                            {
+                                <tr>
+                                    <td class="d-flex align-items-center font-weight-bolder">@item.Product.ProductName</td>
+                                    <td class="text-right align-middle font-weight-bolder font-size-h5">@item.Quantity</td>
+                                    <td class="text-right align-middle font-weight-bolder font-size-h5">@item.Product.Price</td>
+                                    <td class="text-right align-middle">
+                                        <a class="btn btn-primary font-weight-bolder font-size-sm" href="@Url.Action("AddToCart", "Home", new { productId = item.Product.ProductId, url="Checkout" })">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                        <a class="btn btn-danger font-weight-bolder font-size-sm" href="@Url.Action("DecreaseQty", "Home", new { productId = item.Product.ProductId, url="Checkout" })">
+                                            <i class="fa fa-minus"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
 
+                            <tr>
+                                <td colspan="2"></td>
+                                <td class="font-weight-bolder font-size-h4 text-right">Subtotal</td>
+                                <td class="font-weight-bolder font-size-h4 text-right">$1538.00</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="border-0 text-right pt-10">
+                                    <a class="btn btn-success font-weight-bolder px-8" href="@Url.Action("CheckoutDetails","Home")">Procesar Orden</a>
+                                </td>
+                            </tr>
+                            <!--end::Cart Footer-->
+                        </tbody>
+                    </table>
+                </div>
+                <!--end::Shopping Cart-->
+            </div>
+        </div>
+        <!--end::Section-->
+    </div>
 }
+
