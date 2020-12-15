@@ -29,5 +29,20 @@ namespace Ecommerce.Models.Home
             };
 
         }
+
+        public HomeIndexViewModel CreateModel2(string search, int pageSize, int? page)
+        {
+            var data2 = context.Tbl_Product.Include("Tbl_Members").ToList().ToPagedList(page ?? 1, pageSize);
+            SqlParameter[] pram = new SqlParameter[] {
+                   new SqlParameter("@search",search??(object)DBNull.Value)
+                   };
+
+            IPagedList<Tbl_Product> data = context.Database.SqlQuery<Tbl_Product>("GetBySearch @search", pram).ToList().ToPagedList(page ?? 1, pageSize);
+            return new HomeIndexViewModel
+            {
+                ListOfProducts = data2
+            };
+
+        }
     }
 }

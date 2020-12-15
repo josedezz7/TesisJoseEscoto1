@@ -17,7 +17,7 @@ namespace Ecommerce.Controllers
         public ActionResult Index(string search, int? page)
         {
             HomeIndexViewModel model = new HomeIndexViewModel();
-            return View(model.CreateModel(search, 6, page,7));
+            return View(model.CreateModel2(search, 6, page));
         }
 
         public ActionResult Checkout()
