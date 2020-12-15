@@ -12,33 +12,29 @@ namespace Ecommerce.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_Product
+    public partial class Tbl_Shipping
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Tbl_Product()
+        public Tbl_Shipping()
         {
-            this.Tbl_Cart = new HashSet<Tbl_Cart>();
             this.Tbl_ShippingDetail = new HashSet<Tbl_ShippingDetail>();
         }
     
-        public int ProductId { get; set; }
-        public string ProductName { get; set; }
-        public Nullable<int> CategoryId { get; set; }
-        public Nullable<bool> IsActive { get; set; }
-        public Nullable<bool> IsDelete { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public string ProductImage { get; set; }
-        public Nullable<bool> IsFeatured { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public Nullable<decimal> Price { get; set; }
+        public int ShippingId { get; set; }
         public Nullable<int> MemberId { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string Department { get; set; }
+        public Nullable<decimal> AmountPaid { get; set; }
+        public string PaymentType { get; set; }
+        public Nullable<int> Telephone { get; set; }
+        public Nullable<int> MiPymeId { get; set; }
+        public string Status { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_Cart> Tbl_Cart { get; set; }
-        public virtual Tbl_Category Tbl_Category { get; set; }
+        public virtual Tbl_Members Tbl_Members { get; set; }
+        public virtual Tbl_Members Tbl_Members1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_ShippingDetail> Tbl_ShippingDetail { get; set; }
-        public virtual Tbl_Members Tbl_Members { get; set; }
+        public virtual Tbl_Members Tbl_Members2 { get; set; }
     }
 }

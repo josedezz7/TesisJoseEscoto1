@@ -12,8 +12,6 @@ namespace Ecommerce.DAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
     public partial class dbEcommerceEntities1 : DbContext
     {
@@ -27,6 +25,12 @@ namespace Ecommerce.DAL
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tbl_Cart> Tbl_Cart { get; set; }
         public virtual DbSet<Tbl_CartStatus> Tbl_CartStatus { get; set; }
         public virtual DbSet<Tbl_Category> Tbl_Category { get; set; }
@@ -34,16 +38,8 @@ namespace Ecommerce.DAL
         public virtual DbSet<Tbl_Members> Tbl_Members { get; set; }
         public virtual DbSet<Tbl_Product> Tbl_Product { get; set; }
         public virtual DbSet<Tbl_Roles> Tbl_Roles { get; set; }
-        public virtual DbSet<Tbl_ShippingDetails> Tbl_ShippingDetails { get; set; }
+        public virtual DbSet<Tbl_Shipping> Tbl_Shipping { get; set; }
+        public virtual DbSet<Tbl_ShippingDetail> Tbl_ShippingDetail { get; set; }
         public virtual DbSet<Tbl_SlideImage> Tbl_SlideImage { get; set; }
-    
-        public virtual ObjectResult<GetBySearch_Result> GetBySearch(string search)
-        {
-            var searchParameter = search != null ?
-                new ObjectParameter("search", search) :
-                new ObjectParameter("search", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetBySearch_Result>("GetBySearch", searchParameter);
-        }
     }
 }

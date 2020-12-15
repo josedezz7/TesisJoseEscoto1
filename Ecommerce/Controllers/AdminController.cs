@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Ecommerce.Controllers
 {
+    //[Authorize(Roles = "MiPymes")]
     public class AdminController : Controller
     {
         // GET: Admin

@@ -16,10 +16,10 @@ namespace Ecommerce.Models.Home
         public GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
         dbEcommerceEntities1 context = new dbEcommerceEntities1();
         public IPagedList<Tbl_Product> ListOfProducts { get; set; }
-        public HomeIndexViewModel CreateModel(string search, int pageSize, int? page)
+        public HomeIndexViewModel CreateModel(string search, int pageSize, int? page, int id)
         {
             SqlParameter[] pram = new SqlParameter[] {
-                   new SqlParameter("@search",search??(object)DBNull.Value)
+                   new SqlParameter("@search",search??(object)DBNull.Value), new SqlParameter("@memberId",id)
                    };
 
             IPagedList<Tbl_Product> data = context.Database.SqlQuery<Tbl_Product>("GetBySearch @search", pram).ToList().ToPagedList(page ?? 1, pageSize);
