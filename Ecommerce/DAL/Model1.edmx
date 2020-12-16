@@ -162,6 +162,7 @@
           <Property Name="Telephone" Type="int" />
           <Property Name="MiPymeId" Type="int" />
           <Property Name="Status" Type="varchar" MaxLength="500" />
+          <Property Name="Date" Type="datetime" />
         </EntityType>
         <EntityType Name="Tbl_ShippingDetail">
           <Key>
@@ -571,6 +572,7 @@
           <NavigationProperty Name="Tbl_Members1" Relationship="Self.FK_Tbl_Shipping_Tbl_Members" FromRole="Tbl_Shipping" ToRole="Tbl_Members" />
           <NavigationProperty Name="Tbl_ShippingDetail" Relationship="Self.FK_Tbl_ShippingDetail_Tbl_Shipping" FromRole="Tbl_Shipping" ToRole="Tbl_ShippingDetail" />
           <NavigationProperty Name="Tbl_Members2" Relationship="dbEcommerceModel.FK_Tbl_Shipping_Tbl_Members1" FromRole="Tbl_Shipping" ToRole="Tbl_Members" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Tbl_ShippingDetail">
           <Key>
@@ -934,6 +936,7 @@
           <EntitySetMapping Name="Tbl_Shipping">
             <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_Shipping">
               <MappingFragment StoreEntitySet="Tbl_Shipping">
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="ShippingId" ColumnName="ShippingId" />
                 <ScalarProperty Name="MemberId" ColumnName="MemberId" />
                 <ScalarProperty Name="Address" ColumnName="Address" />

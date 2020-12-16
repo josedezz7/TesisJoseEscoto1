@@ -30,6 +30,7 @@ namespace Ecommerce.DAL
         public Nullable<int> Telephone { get; set; }
         public Nullable<int> MiPymeId { get; set; }
         public string Status { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
     
         public virtual Tbl_Members Tbl_Members { get; set; }
         public virtual Tbl_Members Tbl_Members1 { get; set; }
