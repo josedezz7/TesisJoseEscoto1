@@ -6,9 +6,8 @@
 
 <h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post))
+@using (Html.BeginForm())
 {
-   
     <h4>Cree una cuenta nueva.</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
@@ -32,11 +31,11 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Registrarse" />
+           @* <button type="submit" class="btn btn-default">Registrarse</button>*@
+            <input type="submit" class="btn btn-default" value="Registro"/>
         </div>
     </div>
 }
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

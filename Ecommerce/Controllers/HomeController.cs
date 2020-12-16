@@ -27,7 +27,7 @@ namespace Ecommerce.Controllers
 
         public ActionResult CheckoutDetails()
         {
-            return View();
+            return View(new OrderViewModel());
         }
 
         public ActionResult DecreaseQty(int productId)

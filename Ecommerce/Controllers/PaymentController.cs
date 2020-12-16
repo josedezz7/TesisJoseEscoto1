@@ -1,4 +1,8 @@
 ﻿
+using Ecommerce.DAL;
+using Ecommerce.Models.Home;
+using Ecommerce.Repository;
+using Microsoft.Ajax.Utilities;
 using PayPalCheckoutSdk.Orders;
 using System;
 using System.Collections.Generic;
@@ -12,6 +16,10 @@ namespace Ecommerce.Controllers
 {
     public class PaymentController : Controller
     {
+        dbEcommerceEntities1 ctx = new dbEcommerceEntities1();
+        public GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
+
+
         [HttpGet]
         [Route("Payment/PaypalPagoExitoso/{token}/{PayerID}")]
         public async Task<ActionResult> PaypalPagoExitoso(string token, string PayerID)
@@ -20,10 +28,11 @@ namespace Ecommerce.Controllers
         }
         // GET: Payment
         [HttpGet]
-        public async Task<ActionResult> PaymentWithPaypal()
+        public async Task<ActionResult> PaymentWithPaypal(string address)
         {
             try
             {
+                SaveOrder(new OrderViewModel());
                 string PayerId = Request.Params["PayerID"];
 
                 if (string.IsNullOrEmpty(PayerId))
@@ -67,6 +76,41 @@ namespace Ecommerce.Controllers
             }
 
             return View("SuccessView");
+        }
+
+        public void SaveOrder(OrderViewModel model)
+        {
+            if (Session["cart"] != "")
+            {
+                List<Models.Home.Item> cart = (List<Models.Home.Item>)(Session["cart"]);
+                var groupedItems = cart.GroupBy(x => x.Product.MemberId).ToList();
+
+                foreach (var item in groupedItems)
+                {
+                    var newOrder = new Tbl_Shipping
+                    {
+                        Address = model.Address,
+                        AmountPaid = model.Amount,
+                        City = model.City,
+                        Department = model.Department,
+                        MemberId = 7,
+                        MiPymeId = item.Key,
+                        PaymentType = "PayPal",
+                        Status = "PENDING"
+                    };
+                    
+                    foreach(var product in item)
+                    {
+                        var shippingDetail = new Tbl_ShippingDetail
+                        {
+                            ProductId = product.Product.ProductId,
+                            ShippingId = newOrder.ShippingId
+                        };
+                        newOrder.Tbl_ShippingDetail.Add(shippingDetail);
+                    }
+                    _unitOfWork.GetRepositoryInstance<Tbl_Shipping>().Add(newOrder);
+                }
+            }
         }
 
         /* private object ExecutePayment(string payerId, string PaymentId)
