@@ -1,0 +1,54 @@
+﻿
+@model IEnumerable<Ecommerce.DAL.Tbl_ShippingDetail>
+
+@{
+    ViewBag.Title = "Shipping Detail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Detalle</h2>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Detalle de Ordenes
+
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Orden</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int count = 1;
+
+                        foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>@item.ShippingId</td>
+                                <td@(item?.Tbl_Product.ProductName??"")</td>
+                              
+                                <td>
+                                    @Html.ActionLink("Ver Detalle", "ProductEdit", new { shippingId = item.ShippingId })
+                                </td>
+                            </tr>
+                            count++;
+                        }
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+

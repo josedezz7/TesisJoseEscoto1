@@ -28,11 +28,10 @@ namespace Ecommerce.Controllers
         }
         // GET: Payment
         [HttpGet]
-        public async Task<ActionResult> PaymentWithPaypal(string address)
+        public async Task<ActionResult> PaymentWithPaypal(string address,string city, string department, string telephone)
         {
             try
             {
-                SaveOrder(new OrderViewModel());
                 string PayerId = Request.Params["PayerID"];
 
                 if (string.IsNullOrEmpty(PayerId))
@@ -53,6 +52,13 @@ namespace Ecommerce.Controllers
                         if (lnk.Rel.ToLower().Trim().Equals("approve"))
                         {
                             paypalRedirectURL = lnk.Href;
+                            SaveOrder(new OrderViewModel
+                            {
+                                Address = address,
+                                City = city,
+                                Department = department,
+                                Telephone = telephone
+                            });
                             return Redirect(paypalRedirectURL);
                         }
                     }

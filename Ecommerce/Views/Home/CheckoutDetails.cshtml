@@ -1,5 +1,6 @@
 ﻿@using Ecommerce.Models.Home;
 @model Ecommerce.Models.Home.OrderViewModel
+  
 @{
     ViewBag.Title = "CheckoutDetails";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -32,7 +33,7 @@ else
                             <div class="row justify-content-center py-8 px-8 py-lg-15 px-lg-10">
                                 <div class="col-xl-12 col-xxl-7">
                                     <!--begin: Wizard Form-->
-                                    
+                                  
                                     <form class="form mt-0 mt-lg-10" id="kt_form">
                                         <!--begin: Wizard Step 1-->
                                         <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
@@ -40,7 +41,7 @@ else
                                             <!--begin::Input-->
                                             <div class="form-group">
                                                 @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
-                                                @Html.TextBoxFor(m => m.Address, new { @class = "form-control form-control-solid form-control-lg" })
+                                                @Html.TextBoxFor(m => m.Address, new { @class = "form-control form-control-solid form-control-lg", id = "address" })
                                                 <span class="form-text text-muted">Por favor ingresa tu dirección.</span>
                                             </div>
                                             <!--end::Input-->
@@ -50,7 +51,7 @@ else
                                                     <!--begin::Input-->
                                                     <div class="form-group">
                                                         @Html.LabelFor(m => m.City, new { @class = "col-md-4 control-label" })
-                                                        @Html.TextBoxFor(m => m.City, new { @class = "form-control form-control-solid form-control-lg" })
+                                                        @Html.TextBoxFor(m => m.City, new { @class = "form-control form-control-solid form-control-lg", id = "city" })
                                                         <span class="form-text text-muted">Por favor ingresa tu ciudad.</span>
                                                     </div>
                                                     <!--end::Input-->
@@ -60,7 +61,7 @@ else
                                                     <!--begin::Input-->
                                                     <div class="form-group">
                                                         @Html.LabelFor(m => m.Department, new { @class = "col-md-6 control-label" })
-                                                        @Html.TextBoxFor(m => m.Department, new { @class = "form-control form-control-solid form-control-lg" })
+                                                        @Html.TextBoxFor(m => m.Department, new { @class = "form-control form-control-solid form-control-lg", id = "department" })
                                                         <span class="form-text text-muted">Por favor ingresa tu departamento.</span>
                                                     </div>
                                                     <!--end::Input-->
@@ -71,7 +72,7 @@ else
                                                     <!--begin::Input-->
                                                     <div class="form-group">
                                                         @Html.LabelFor(m => m.Telephone, new { @class = "col-md-6 control-label" })
-                                                        @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control form-control-solid form-control-lg" })
+                                                        @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control form-control-solid form-control-lg", id = "telephone" })
                                                         <span class="form-text text-muted">Por favor ingresa tu telefono o celular.</span>
                                                     </div>
                                                     <!--end::Input-->
@@ -79,7 +80,7 @@ else
                                             </div>
                                         </div>
                                         <!--end: Wizard Step 1-->
-                                        <input href="@Url.Action("PaymentWithPaypal", "Payment", new {address=Model.Address})" class="btn btn-success" type="submit" value="Pagar" />
+                                        <input type="button" class="btn btn-success" value="Pagar" id="btnSave" onclick="save()"/>
                                        
                                     </form>
                                     <!--end: Wizard Form-->
@@ -152,3 +153,26 @@ else
         <!--end::Section-->
     </div>
 }
+
+<script>
+
+    function save() {
+        var address = $("#address").val();
+        var city = $("#city").val();
+        var department = $("#department").val();
+        var telephone = $("#telephone").val();
+
+        var model = {
+            address: address,
+            citiy: city,
+            department: department,
+            telephone:telephone
+        }
+
+        var url = "@Url.Action("PaymentWithPaypal","Payment")?address=" + address + "&city=" + city + "&department=" + department + "&telephone="+telephone;
+
+        $.get(url, function(res){
+           
+        });
+    }
+</script>

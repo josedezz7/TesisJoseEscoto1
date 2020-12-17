@@ -74,11 +74,22 @@ namespace Ecommerce.Controllers
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Product>().GetProduct());
         }
 
+        public ActionResult Shipping()
+        {
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Shipping>().GetAllRecord().Where(x=>x.MiPymeId==1));
+        }
+
         public ActionResult ProductEdit(int productId)
         {
             ViewBag.CategoryList = GetCategory();
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Product>().getFirstorDefault(productId));
         }
+
+        public ActionResult ShippingDetail(int shippingId)
+        {
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_ShippingDetail>().GetAllRecord().Where(x => x.ShippingId == shippingId));
+        }
+
         [HttpPost]
         public ActionResult ProductEdit(Tbl_Product tbl, HttpPostedFileBase file)
         {
