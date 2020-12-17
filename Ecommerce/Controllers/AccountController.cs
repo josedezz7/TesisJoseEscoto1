@@ -13,6 +13,7 @@ using Ecommerce.Models;
 namespace Ecommerce.Controllers
 {
     [Authorize]
+    [Route("Account")]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -137,16 +138,17 @@ namespace Ecommerce.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
+        [HttpGet]
         public ActionResult Register()
         {
-            return View(new RegisterViewModel());
+            return View();
         }
 
         //
-        // POST: /Account/Register
-        [HttpPost]
+        // POST: /Account/Register  
         [AllowAnonymous]
-        //[ValidateAntiForgeryToken]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
