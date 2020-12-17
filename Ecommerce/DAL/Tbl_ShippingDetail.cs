@@ -17,6 +17,7 @@ namespace Ecommerce.DAL
         public int ShippingDetailId { get; set; }
         public int ShippingId { get; set; }
         public int ProductId { get; set; }
+        public Nullable<int> Quantity { get; set; }
     
         public virtual Tbl_Product Tbl_Product { get; set; }
         public virtual Tbl_Shipping Tbl_Shipping { get; set; }
