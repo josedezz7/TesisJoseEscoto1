@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="dbEcommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="dbEcommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -159,7 +159,7 @@
           <Property Name="Department" Type="varchar" MaxLength="500" />
           <Property Name="AmountPaid" Type="decimal" Precision="18" Scale="0" />
           <Property Name="PaymentType" Type="varchar" MaxLength="50" />
-          <Property Name="Telephone" Type="int" />
+          <Property Name="Telephone" Type="varchar" MaxLength="50" />
           <Property Name="MiPymeId" Type="int" />
           <Property Name="Status" Type="varchar" MaxLength="500" />
           <Property Name="Date" Type="datetime" />
@@ -399,7 +399,8 @@
             <End Role="Tbl_ShippingDetail" EntitySet="Tbl_ShippingDetail" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbEcommerceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -522,9 +523,9 @@
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="Type" Type="Int32" />
           <NavigationProperty Name="Tbl_Shipping" Relationship="Self.FK__Tbl_Shipp__Membe__30F848ED" FromRole="Tbl_Members" ToRole="Tbl_Shipping" />
+          <NavigationProperty Name="Tbl_Product" Relationship="Self.FK_Tbl_Product_Tbl_Members" FromRole="Tbl_Members" ToRole="Tbl_Product" />
           <NavigationProperty Name="Tbl_Shipping1" Relationship="Self.FK_Tbl_Shipping_Tbl_Members" FromRole="Tbl_Members" ToRole="Tbl_Shipping" />
-          <NavigationProperty Name="Tbl_Shipping2" Relationship="dbEcommerceModel.FK_Tbl_Shipping_Tbl_Members1" FromRole="Tbl_Members" ToRole="Tbl_Shipping" />
-          <NavigationProperty Name="Tbl_Product" Relationship="dbEcommerceModel.FK_Tbl_Product_Tbl_Members" FromRole="Tbl_Members" ToRole="Tbl_Product" />
+          <NavigationProperty Name="Tbl_Shipping2" Relationship="Self.FK_Tbl_Shipping_Tbl_Members1" FromRole="Tbl_Members" ToRole="Tbl_Shipping" />
         </EntityType>
         <EntityType Name="Tbl_Product">
           <Key>
@@ -541,11 +542,11 @@
           <Property Name="IsFeatured" Type="Boolean" />
           <Property Name="Quantity" Type="Int32" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MemberId" Type="Int32" />
           <NavigationProperty Name="Tbl_Cart" Relationship="Self.FK__Tbl_Cart__Produc__38996AB5" FromRole="Tbl_Product" ToRole="Tbl_Cart" />
           <NavigationProperty Name="Tbl_Category" Relationship="Self.FK__Tbl_Produ__Categ__286302EC" FromRole="Tbl_Product" ToRole="Tbl_Category" />
+          <NavigationProperty Name="Tbl_Members" Relationship="Self.FK_Tbl_Product_Tbl_Members" FromRole="Tbl_Product" ToRole="Tbl_Members" />
           <NavigationProperty Name="Tbl_ShippingDetail" Relationship="Self.FK_Tbl_ShippingDetail_Tbl_Product" FromRole="Tbl_Product" ToRole="Tbl_ShippingDetail" />
-          <Property Name="MemberId" Type="Int32" />
-          <NavigationProperty Name="Tbl_Members" Relationship="dbEcommerceModel.FK_Tbl_Product_Tbl_Members" FromRole="Tbl_Product" ToRole="Tbl_Members" />
         </EntityType>
         <EntityType Name="Tbl_Roles">
           <Key>
@@ -565,14 +566,14 @@
           <Property Name="Department" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="AmountPaid" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="PaymentType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Telephone" Type="Int32" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="MiPymeId" Type="Int32" />
           <Property Name="Status" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Tbl_Members" Relationship="Self.FK__Tbl_Shipp__Membe__30F848ED" FromRole="Tbl_Shipping" ToRole="Tbl_Members" />
           <NavigationProperty Name="Tbl_Members1" Relationship="Self.FK_Tbl_Shipping_Tbl_Members" FromRole="Tbl_Shipping" ToRole="Tbl_Members" />
+          <NavigationProperty Name="Tbl_Members2" Relationship="Self.FK_Tbl_Shipping_Tbl_Members1" FromRole="Tbl_Shipping" ToRole="Tbl_Members" />
           <NavigationProperty Name="Tbl_ShippingDetail" Relationship="Self.FK_Tbl_ShippingDetail_Tbl_Shipping" FromRole="Tbl_Shipping" ToRole="Tbl_ShippingDetail" />
-          <NavigationProperty Name="Tbl_Members2" Relationship="dbEcommerceModel.FK_Tbl_Shipping_Tbl_Members1" FromRole="Tbl_Shipping" ToRole="Tbl_Members" />
-          <Property Name="Date" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Tbl_ShippingDetail">
           <Key>
@@ -656,6 +657,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tbl_Product_Tbl_Members">
+          <End Role="Tbl_Members" Type="Self.Tbl_Members" Multiplicity="0..1" />
+          <End Role="Tbl_Product" Type="Self.Tbl_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Members">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Tbl_Product">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tbl_Shipping_Tbl_Members">
           <End Role="Tbl_Members" Type="Self.Tbl_Members" Multiplicity="0..1" />
           <End Role="Tbl_Shipping" Type="Self.Tbl_Shipping" Multiplicity="*" />
@@ -665,6 +678,18 @@
             </Principal>
             <Dependent Role="Tbl_Shipping">
               <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Shipping_Tbl_Members1">
+          <End Role="Tbl_Members" Type="Self.Tbl_Members" Multiplicity="0..1" />
+          <End Role="Tbl_Shipping" Type="Self.Tbl_Shipping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Members">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Tbl_Shipping">
+              <PropertyRef Name="MiPymeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -733,7 +758,15 @@
             <End Role="Tbl_Members" EntitySet="Tbl_Members" />
             <End Role="Tbl_Shipping" EntitySet="Tbl_Shipping" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Product_Tbl_Members" Association="Self.FK_Tbl_Product_Tbl_Members">
+            <End Role="Tbl_Members" EntitySet="Tbl_Members" />
+            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
+          </AssociationSet>
           <AssociationSet Name="FK_Tbl_Shipping_Tbl_Members" Association="Self.FK_Tbl_Shipping_Tbl_Members">
+            <End Role="Tbl_Members" EntitySet="Tbl_Members" />
+            <End Role="Tbl_Shipping" EntitySet="Tbl_Shipping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Shipping_Tbl_Members1" Association="Self.FK_Tbl_Shipping_Tbl_Members1">
             <End Role="Tbl_Members" EntitySet="Tbl_Members" />
             <End Role="Tbl_Shipping" EntitySet="Tbl_Shipping" />
           </AssociationSet>
@@ -749,39 +782,7 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tbl_Shipping_Tbl_Members1" Association="dbEcommerceModel.FK_Tbl_Shipping_Tbl_Members1">
-            <End Role="Tbl_Members" EntitySet="Tbl_Members" />
-            <End Role="Tbl_Shipping" EntitySet="Tbl_Shipping" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tbl_Product_Tbl_Members" Association="dbEcommerceModel.FK_Tbl_Product_Tbl_Members">
-            <End Role="Tbl_Members" EntitySet="Tbl_Members" />
-            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
-          </AssociationSet>
         </EntityContainer>
-        <Association Name="FK_Tbl_Shipping_Tbl_Members1">
-          <End Type="dbEcommerceModel.Tbl_Members" Role="Tbl_Members" Multiplicity="0..1" />
-          <End Type="dbEcommerceModel.Tbl_Shipping" Role="Tbl_Shipping" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tbl_Members">
-              <PropertyRef Name="MemberId" />
-            </Principal>
-            <Dependent Role="Tbl_Shipping">
-              <PropertyRef Name="MiPymeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tbl_Product_Tbl_Members">
-          <End Type="dbEcommerceModel.Tbl_Members" Role="Tbl_Members" Multiplicity="0..1" />
-          <End Type="dbEcommerceModel.Tbl_Product" Role="Tbl_Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tbl_Members">
-              <PropertyRef Name="MemberId" />
-            </Principal>
-            <Dependent Role="Tbl_Product">
-              <PropertyRef Name="MemberId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -910,7 +911,6 @@
           <EntitySetMapping Name="Tbl_Product">
             <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_Product">
               <MappingFragment StoreEntitySet="Tbl_Product">
-                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
@@ -922,6 +922,7 @@
                 <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -936,7 +937,6 @@
           <EntitySetMapping Name="Tbl_Shipping">
             <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_Shipping">
               <MappingFragment StoreEntitySet="Tbl_Shipping">
-                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="ShippingId" ColumnName="ShippingId" />
                 <ScalarProperty Name="MemberId" ColumnName="MemberId" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
@@ -947,6 +947,7 @@
                 <ScalarProperty Name="Telephone" ColumnName="Telephone" />
                 <ScalarProperty Name="MiPymeId" ColumnName="MiPymeId" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

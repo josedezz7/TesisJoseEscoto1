@@ -4,34 +4,34 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ac4227b174bf43d38111c679146af0d9" Name="Diagram1" ZoomLevel="64">
-        <EntityTypeShape EntityType="dbEcommerceModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbEcommerceModel.AspNetRoles" Width="1.5" PointX="5.75" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbEcommerceModel.AspNetUserClaims" Width="1.5" PointX="10.25" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbEcommerceModel.AspNetUserLogins" Width="1.5" PointX="10.25" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbEcommerceModel.AspNetUsers" Width="1.5" PointX="8" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbEcommerceModel.sysdiagrams" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Cart" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_CartStatus" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Category" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_MemberRole" Width="1.5" PointX="7.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Members" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Product" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Roles" Width="1.5" PointX="9.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Shipping" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_ShippingDetail" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_SlideImage" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="0aa49266ae044a798ccbcb4b5aa7dff7" Name="Diagram1">
+        <EntityTypeShape EntityType="dbEcommerceModel.C__MigrationHistory" Width="1.5" PointX="2.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbEcommerceModel.AspNetRoles" Width="1.5" PointX="7.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbEcommerceModel.AspNetUserClaims" Width="1.5" PointX="12.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbEcommerceModel.AspNetUserLogins" Width="1.5" PointX="12.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbEcommerceModel.AspNetUsers" Width="1.5" PointX="10" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbEcommerceModel.sysdiagrams" Width="1.5" PointX="4.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Cart" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_CartStatus" Width="1.5" PointX="7.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_MemberRole" Width="1.5" PointX="9.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Members" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Product" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Roles" Width="1.5" PointX="7.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Shipping" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_ShippingDetail" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_SlideImage" Width="1.5" PointX="9.75" PointY="9.875" IsExpanded="true" />
         <AssociationConnector Association="dbEcommerceModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="dbEcommerceModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Cart__Produc__38996AB5" ManuallyRouted="false" />
         <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Produ__Categ__286302EC" ManuallyRouted="false" />
         <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Shipp__Membe__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="dbEcommerceModel.FK_Tbl_Product_Tbl_Members" ManuallyRouted="false" />
         <AssociationConnector Association="dbEcommerceModel.FK_Tbl_Shipping_Tbl_Members" ManuallyRouted="false" />
+        <AssociationConnector Association="dbEcommerceModel.FK_Tbl_Shipping_Tbl_Members1" ManuallyRouted="false" />
         <AssociationConnector Association="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Product" ManuallyRouted="false" />
         <AssociationConnector Association="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Shipping" ManuallyRouted="false" />
         <AssociationConnector Association="dbEcommerceModel.AspNetUserRoles" ManuallyRouted="false" />
-        <AssociationConnector Association="dbEcommerceModel.FK_Tbl_Shipping_Tbl_Members1" />
-        <AssociationConnector Association="dbEcommerceModel.FK_Tbl_Product_Tbl_Members" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -18,9 +18,9 @@ namespace Ecommerce.DAL
         public Tbl_Members()
         {
             this.Tbl_Shipping = new HashSet<Tbl_Shipping>();
+            this.Tbl_Product = new HashSet<Tbl_Product>();
             this.Tbl_Shipping1 = new HashSet<Tbl_Shipping>();
             this.Tbl_Shipping2 = new HashSet<Tbl_Shipping>();
-            this.Tbl_Product = new HashSet<Tbl_Product>();
         }
     
         public int MemberId { get; set; }
@@ -37,10 +37,10 @@ namespace Ecommerce.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Shipping> Tbl_Shipping { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tbl_Product> Tbl_Product { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Shipping> Tbl_Shipping1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Shipping> Tbl_Shipping2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tbl_Product> Tbl_Product { get; set; }
     }
 }

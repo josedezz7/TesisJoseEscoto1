@@ -27,15 +27,15 @@ namespace Ecommerce.DAL
         public string Department { get; set; }
         public Nullable<decimal> AmountPaid { get; set; }
         public string PaymentType { get; set; }
-        public Nullable<int> Telephone { get; set; }
+        public string Telephone { get; set; }
         public Nullable<int> MiPymeId { get; set; }
         public string Status { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
     
         public virtual Tbl_Members Tbl_Members { get; set; }
         public virtual Tbl_Members Tbl_Members1 { get; set; }
+        public virtual Tbl_Members Tbl_Members2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_ShippingDetail> Tbl_ShippingDetail { get; set; }
-        public virtual Tbl_Members Tbl_Members2 { get; set; }
     }
 }
