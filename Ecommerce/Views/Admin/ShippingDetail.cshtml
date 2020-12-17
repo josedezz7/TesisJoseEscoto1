@@ -27,20 +27,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @{int count = 1;
-
+                    @{
                         foreach (var item in Model)
                         {
-
                             <tr>
                                 <td>@item.ShippingId</td>
-                                <td@(item?.Tbl_Product.ProductName??"")</td>
-                              
-                                <td>
-                                    @Html.ActionLink("Ver Detalle", "ProductEdit", new { shippingId = item.ShippingId })
-                                </td>
+                                <td>@(item?.Tbl_Product.ProductName??"")</td>
+                                <td>@item.Quantity</td>
+                                <td>@(item?.Tbl_Product.Price??0)</td>
+                                <td>@(item.Quantity*item?.Tbl_Product?.Price??0)</td>
+                       
                             </tr>
-                            count++;
                         }
 
                     }

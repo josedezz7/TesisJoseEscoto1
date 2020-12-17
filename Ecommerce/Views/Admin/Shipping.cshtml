@@ -32,7 +32,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @{int count = 1;
+                    @{
 
                         foreach (var item in Model)
                         {
@@ -47,10 +47,11 @@
                                             <td>@item.Date</td>
                                             <td>@item.Status</td>
                                             <td>
-                                                @Html.ActionLink("Ver Detalle", "ProductEdit", new { shippingId = item.ShippingId })
+                                                @Html.ActionLink("Ver Detalle", "ShippingDetail", new { shippingId = item.ShippingId })
+                                                <br/>
+                                                @Html.ActionLink("Actualizar Estado", "UpdateStatus", new { shippingId = item.ShippingId })
                                             </td>
                                         </tr>
-                            count++;
                         }
 
                     }

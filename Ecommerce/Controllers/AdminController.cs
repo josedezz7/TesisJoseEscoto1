@@ -2,6 +2,7 @@
 using Ecommerce.Models;
 using Ecommerce.Repository;
 using Newtonsoft.Json;
+using PayPalCheckoutSdk.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,6 +57,30 @@ namespace Ecommerce.Controllers
                 cd = new CategoryDetail();
             }
             return View("UpdateCategory", cd);
+        }
+
+        public ActionResult UpdateStatus(int shippingId)
+        {
+            if (shippingId != null)
+            {
+                var orden = _unitOfWork.GetRepositoryInstance<Tbl_Shipping>().getFirstorDefault(shippingId);
+                if (orden.Status == "PENDING")
+                {
+                    orden.Status = "INPROCESS";
+                }
+                else if (orden.Status == "INPROCESS")
+                {
+                    orden.Status = "SHIPPED";
+                }
+                else if(orden.Status == "SHIPPED")
+                {
+                    orden.Status = "DELIVERED";
+                }
+
+                _unitOfWork.GetRepositoryInstance<Tbl_Shipping>().Update(orden);
+            }
+
+            return RedirectToAction("Shipping");
         }
 
         public ActionResult CategoryEdit(int catId)

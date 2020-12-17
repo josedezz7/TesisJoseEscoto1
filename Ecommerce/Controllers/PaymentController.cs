@@ -26,12 +26,26 @@ namespace Ecommerce.Controllers
         {
             return View("SuccessView");
         }
+
+        public ActionResult CrearOrden(string address, string city, string department, string telephone)
+        {
+            SaveOrder(new OrderViewModel
+            {
+                Address = address,
+                City = city,
+                Department = department,
+                Telephone = telephone
+            });
+
+            return RedirectToAction("PaymentWithPaypal");
+        }
+
         // GET: Payment
         [HttpGet]
-        public async Task<ActionResult> PaymentWithPaypal(string address,string city, string department, string telephone)
+        public async Task<ActionResult> PaymentWithPaypal()
         {
             try
-            {
+            {            
                 string PayerId = Request.Params["PayerID"];
 
                 if (string.IsNullOrEmpty(PayerId))
@@ -52,13 +66,7 @@ namespace Ecommerce.Controllers
                         if (lnk.Rel.ToLower().Trim().Equals("approve"))
                         {
                             paypalRedirectURL = lnk.Href;
-                            SaveOrder(new OrderViewModel
-                            {
-                                Address = address,
-                                City = city,
-                                Department = department,
-                                Telephone = telephone
-                            });
+                          
                             return Redirect(paypalRedirectURL);
                         }
                     }
@@ -102,7 +110,9 @@ namespace Ecommerce.Controllers
                         MemberId = 7,
                         MiPymeId = item.Key,
                         PaymentType = "PayPal",
-                        Status = "PENDING"
+                        Status = "PENDING",
+                        Telephone=model.Telephone,
+                        Date=DateTime.Now
                     };
                     
                     foreach(var product in item)

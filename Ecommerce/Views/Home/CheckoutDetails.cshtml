@@ -169,7 +169,7 @@ else
             telephone:telephone
         }
 
-        var url = "@Url.Action("PaymentWithPaypal","Payment")?address=" + address + "&city=" + city + "&department=" + department + "&telephone="+telephone;
+        var url = "@Url.Action("CrearOrden", "Payment")?address=" + address + "&city=" + city + "&department=" + department + "&telephone="+telephone;
 
         $.get(url, function(res){
            
