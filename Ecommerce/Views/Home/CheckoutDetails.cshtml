@@ -171,8 +171,10 @@ else
 
         var url = "@Url.Action("CrearOrden", "Payment")?address=" + address + "&city=" + city + "&department=" + department + "&telephone="+telephone;
 
-        $.get(url, function(res){
-           
+        $.post(url, function (res) {
+            //var open = window.open(res);
+            window.location.replace(res);
+            //window.location.replace(currentLocation);
         });
     }
 </script>

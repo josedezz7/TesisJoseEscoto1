@@ -27,6 +27,7 @@ namespace Ecommerce.Controllers
             return View("SuccessView");
         }
 
+       [HttpPost]
         public ActionResult CrearOrden(string address, string city, string department, string telephone)
         {
             SaveOrder(new OrderViewModel
@@ -42,6 +43,7 @@ namespace Ecommerce.Controllers
 
         // GET: Payment
         [HttpGet]
+        [AllowCrossSiteJson]
         public async Task<ActionResult> PaymentWithPaypal()
         {
             try
@@ -67,7 +69,7 @@ namespace Ecommerce.Controllers
                         {
                             paypalRedirectURL = lnk.Href;
                           
-                            return Redirect(paypalRedirectURL);
+                            return Json(paypalRedirectURL, JsonRequestBehavior.AllowGet);
                         }
                     }
                 }
