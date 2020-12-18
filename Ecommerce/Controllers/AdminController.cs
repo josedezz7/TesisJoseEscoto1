@@ -64,17 +64,17 @@ namespace Ecommerce.Controllers
             if (shippingId != null)
             {
                 var orden = _unitOfWork.GetRepositoryInstance<Tbl_Shipping>().getFirstorDefault(shippingId);
-                if (orden.Status == "PENDING")
+                if (orden.Status == "Pendiente")
                 {
-                    orden.Status = "INPROCESS";
+                    orden.Status = "En Proceso";
                 }
-                else if (orden.Status == "INPROCESS")
+                else if (orden.Status == "En Proceso")
                 {
-                    orden.Status = "SHIPPED";
+                    orden.Status = "Enviado";
                 }
-                else if(orden.Status == "SHIPPED")
+                else if(orden.Status == "Enviado")
                 {
-                    orden.Status = "DELIVERED";
+                    orden.Status = "Entregado";
                 }
 
                 _unitOfWork.GetRepositoryInstance<Tbl_Shipping>().Update(orden);
