@@ -116,16 +116,21 @@ namespace Ecommerce.Controllers
                         Telephone=model.Telephone,
                         Date=DateTime.Now
                     };
+
+                    decimal? total = 0;
                     
                     foreach(var product in item)
                     {
                         var shippingDetail = new Tbl_ShippingDetail
                         {
                             ProductId = product.Product.ProductId,
-                            ShippingId = newOrder.ShippingId
+                            ShippingId = newOrder.ShippingId,
+                            Quantity=product.Quantity
                         };
+                        total += shippingDetail.Quantity * product.Product.Price;
                         newOrder.Tbl_ShippingDetail.Add(shippingDetail);
                     }
+                    newOrder.AmountPaid = total;
                     _unitOfWork.GetRepositoryInstance<Tbl_Shipping>().Add(newOrder);
                 }
             }
