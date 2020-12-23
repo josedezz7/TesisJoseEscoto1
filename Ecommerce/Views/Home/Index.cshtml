@@ -69,7 +69,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="page-header">
-            <label class="font-size-h1 font-weight-bolder text-dark mb-7">Productos </label>&nbsp;<label class="font-size-h5 text-dark-50 mb-7"> Trending</label>
+            <label class="font-size-h1 font-weight-bolder text-dark mb-7">Productos </label>&nbsp;<label class="font-size-h5 text-dark-50 mb-7"></label>
         </div>   
     </div>
 </div>
@@ -104,11 +104,10 @@
                                             <a href="#" class="text-dark-75 font-weight-bolder">@item.ProductName</a>
                                         </h4>
                                     </div>
-
                                 </div>
                                 <div class="row">
 
-                                    <div class="col-md-12 col-lg-12 col-xxl-12">
+                                    <div class="col-md-8 col-lg-8 col-xxl-8">
                                         @if (item.Quantity > 0)
                                         {
                                             <p>Disponible</p>
@@ -124,6 +123,15 @@
                                         <label class="font-size-h6 text-muted font-weight-bolder">Precio: @item.Price</label>
                                     </div>
 
+                                    
+                                     <div class="col-md-8 col-lg-8 col-xxl-8">
+                                          <h4 class="font-size-h5">
+                                             <a href="#" class="text-dark-75 font-weight-bolder">MiPyme: @(item?.Tbl_Members?.FirstName??"")</a>
+                                          </h4>
+                                     </div>
+
+                                    
+
                                     <div class="col-md-2 col-lg-2 col-xxl-2">
                                         @if (item.Quantity > 0)
                                         {
@@ -134,14 +142,7 @@
                                         }
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-8 col-lg-8 col-xxl-8">
-                                        <h4 class="font-size-h5">
-                                            <a href="#" class="text-dark-75 font-weight-bolder">MiPyme: @(item?.Tbl_Members?.FirstName??"")</a>
-                                        </h4>
-                                    </div>
-
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

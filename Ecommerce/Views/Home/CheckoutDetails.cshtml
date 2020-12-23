@@ -40,7 +40,7 @@ else
                                             <h4 class="mb-10 font-weight-bold text-dark">Ingresa tu dirección</h4>
                                             <!--begin::Input-->
                                             <div class="form-group">
-                                                @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
+                                                <label>Dirección</label>
                                                 @Html.TextBoxFor(m => m.Address, new { @class = "form-control form-control-solid form-control-lg", id = "address" })
                                                 <span class="form-text text-muted">Por favor ingresa tu dirección.</span>
                                             </div>
@@ -50,7 +50,7 @@ else
                                                 <div class="col-xl-6">
                                                     <!--begin::Input-->
                                                     <div class="form-group">
-                                                        @Html.LabelFor(m => m.City, new { @class = "col-md-4 control-label" })
+                                                        <label>Ciudad</label>
                                                         @Html.TextBoxFor(m => m.City, new { @class = "form-control form-control-solid form-control-lg", id = "city" })
                                                         <span class="form-text text-muted">Por favor ingresa tu ciudad.</span>
                                                     </div>
@@ -60,7 +60,7 @@ else
                                                 <div class="col-xl-6">
                                                     <!--begin::Input-->
                                                     <div class="form-group">
-                                                        @Html.LabelFor(m => m.Department, new { @class = "col-md-6 control-label" })
+                                                        <label>Departamento</label>
                                                         @Html.TextBoxFor(m => m.Department, new { @class = "form-control form-control-solid form-control-lg", id = "department" })
                                                         <span class="form-text text-muted">Por favor ingresa tu departamento.</span>
                                                     </div>
@@ -71,7 +71,7 @@ else
                                                 <div class="col-xl-6">
                                                     <!--begin::Input-->
                                                     <div class="form-group">
-                                                        @Html.LabelFor(m => m.Telephone, new { @class = "col-md-6 control-label" })
+                                                        <label>Telefono</label>
                                                         @Html.TextBoxFor(m => m.Telephone, new { @class = "form-control form-control-solid form-control-lg", id = "telephone" })
                                                         <span class="form-text text-muted">Por favor ingresa tu telefono o celular.</span>
                                                     </div>
