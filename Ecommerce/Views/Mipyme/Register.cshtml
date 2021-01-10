@@ -1,0 +1,40 @@
+﻿@model Ecommerce.Models.RegisterMiPymeViewModel
+@{
+    ViewBag.Title = "Registrarse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2></h2>
+
+@using (Html.BeginForm())
+{
+    <h4>Crear cuenta de MiPyme</h4>
+    <br />
+    <div class="form-group">
+        @Html.LabelFor(m => m.MiPymeName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.MiPymeName, new { @class = "form-control" })
+        </div>
+    </div>
+
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <br />
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            @* <button type="submit" class="btn btn-default">Registrarse</button>*@
+            <input type="submit" value="Crear Cuenta" class="btn btn-success font-weight-bolder px-5" />
+        </div>
+    </div>
+    <br />
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

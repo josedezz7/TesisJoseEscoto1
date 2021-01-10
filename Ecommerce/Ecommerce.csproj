@@ -183,6 +183,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MipymeController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="DAL\AspNetRoles.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -257,6 +258,7 @@
     <Compile Include="Models\Home\OrderViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\RegisterMiPymeViewModel.cs" />
     <Compile Include="Models\Shopping.cs" />
     <Compile Include="PaypalClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -3713,6 +3715,8 @@
     <Content Include="Views\Payment\SuccessView.cshtml" />
     <Content Include="Views\Admin\Shipping.cshtml" />
     <Content Include="Views\Admin\ShippingDetail.cshtml" />
+    <Content Include="Views\Mipyme\Index.cshtml" />
+    <Content Include="Views\Mipyme\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
