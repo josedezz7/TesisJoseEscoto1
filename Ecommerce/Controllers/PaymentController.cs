@@ -113,7 +113,7 @@ namespace Ecommerce.Controllers
                         MemberId = 7,
                         MiPymeId = item.Key,
                         PaymentType = "PayPal",
-                        Status = "Pendiente",
+                        Status = "PENDIENTE",
                         Telephone=model.Telephone,
                         Date=DateTime.Now
                     };

@@ -64,7 +64,7 @@ namespace Ecommerce.Controllers
             if (shippingId != null)
             {
                 var orden = _unitOfWork.GetRepositoryInstance<Tbl_Shipping>().getFirstorDefault(shippingId);
-                if (orden.Status.ToLower().Contains("Pendiente".ToLower()) || orden.Status.ToLower().Contains("PENDING"))
+                if (orden.Status.ToLower().Contains("Pendiente".ToLower()) || orden.Status.ToLower().Contains("PENDING".ToLower()))
                 {
                     orden.Status = "En Proceso";
                 }
