@@ -22,9 +22,9 @@ namespace Ecommerce.Controllers
 
         [HttpGet]
         [Route("Payment/PaypalPagoExitoso/{token}/{PayerID}")]
-        public async Task<ActionResult> PaypalPagoExitoso(string token, string PayerID)
+        public async Task<ActionResult> PaypalPagoExitoso( string token, string PayerID)
         {
-            return View("SuccessView");
+            return View("SuccessView", Session["orderId"]);
         }
 
        [HttpPost]
@@ -38,13 +38,14 @@ namespace Ecommerce.Controllers
                 Telephone = telephone
             });
 
-            return RedirectToAction("PaymentWithPaypal");
+            return RedirectToAction("PaymentWithPaypal",1052);
         }
 
         // GET: Payment
         [HttpGet]
         [AllowCrossSiteJson]
-        public async Task<ActionResult> PaymentWithPaypal()
+        //[Route("Payment/PaymentWithPaypal/{orderId}/{PayerID}")]
+        public async Task<ActionResult> PaymentWithPaypal(string id)
         {
             try
             {            
@@ -56,7 +57,7 @@ namespace Ecommerce.Controllers
                         "Payment/PaymentWithPaypal?";
 
                     var Guid = Convert.ToString((new Random()).Next(100000000));
-                    var createPayment = await this.CreatePaymentAsync();
+                    var createPayment = await this.CreatePaymentAsync(id);
 
                     var links = createPayment.Links.GetEnumerator();
                     string paypalRedirectURL = null;
@@ -112,7 +113,7 @@ namespace Ecommerce.Controllers
                         MemberId = 7,
                         MiPymeId = item.Key,
                         PaymentType = "PayPal",
-                        Status = "PENDING",
+                        Status = "Pendiente",
                         Telephone=model.Telephone,
                         Date=DateTime.Now
                     };
@@ -132,6 +133,7 @@ namespace Ecommerce.Controllers
                     }
                     newOrder.AmountPaid = total;
                     _unitOfWork.GetRepositoryInstance<Tbl_Shipping>().Add(newOrder);
+                    Session["orderId"] = newOrder.ShippingId;
                 }
             }
         }
@@ -160,9 +162,9 @@ namespace Ecommerce.Controllers
             
             return View("FailureView");
         }
+
         
-       
-        private async Task<Order> CreatePaymentAsync()
+        private async Task<Order> CreatePaymentAsync(string orderId)
         {
             decimal total = 0;
             string baseURi = Request.Url.Scheme + "://" + Request.Url.Authority +
@@ -211,7 +213,7 @@ namespace Ecommerce.Controllers
                 },
                     ApplicationContext = new ApplicationContext()
                     {
-                        ReturnUrl = baseURi + "PaypalPagoExitoso",
+                        ReturnUrl = baseURi + "PaypalPagoExitoso/"+ orderId,
                         CancelUrl = baseURi + "PaypalPagoFallido"
                     }
                 };

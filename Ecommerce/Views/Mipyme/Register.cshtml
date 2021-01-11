@@ -6,7 +6,7 @@
 
 <h2></h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Register", "Mipyme", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <h4>Crear cuenta de MiPyme</h4>
     <br />

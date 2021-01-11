@@ -24,7 +24,12 @@ namespace Ecommerce.Controllers
         {
             return View();
         }
-
+        public ActionResult ShippingSearch(string search)
+        {
+            int orderNumber = 0;
+            int.TryParse(search, out orderNumber);
+            return View(ctx.Tbl_Shipping.Where(x => x.MiPymeId == 1 && orderNumber == x.ShippingId).ToList());
+        }
         public ActionResult CheckoutDetails()
         {
             return View(new OrderViewModel());

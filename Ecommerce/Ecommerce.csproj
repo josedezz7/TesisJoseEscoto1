@@ -3717,6 +3717,7 @@
     <Content Include="Views\Admin\ShippingDetail.cshtml" />
     <Content Include="Views\Mipyme\Index.cshtml" />
     <Content Include="Views\Mipyme\Register.cshtml" />
+    <Content Include="Views\Home\ShippingSearch.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

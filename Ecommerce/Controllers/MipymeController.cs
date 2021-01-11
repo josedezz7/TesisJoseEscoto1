@@ -1,4 +1,5 @@
-﻿using Ecommerce.Models;
+﻿using Ecommerce.DAL;
+using Ecommerce.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
@@ -12,13 +13,29 @@ namespace Ecommerce.Controllers
 {
     public class MipymeController : Controller
     {
-
+        List<string> adminUsers = new List<string> {
+        ""
+        };
+        List<UserViewModel> usuariosMiembros = new List<UserViewModel> {
+        new UserViewModel  
+            {
+                    Name = "Beestore",
+                    Email = "beestore@gmail.com"
+             }
+        };
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        dbEcommerceEntities1 ctx = new dbEcommerceEntities1();
+
         // GET: Mipyme
         public ActionResult Index()
         {
-            return View();
+            List<UserViewModel> usuarios = ctx.AspNetUsers.Where(aspnetUser => adminUsers.Contains(aspnetUser.Id)).Select(aspnetUser => new UserViewModel
+            {
+                Name = aspnetUser.UserName,
+                Email = aspnetUser.Email
+            }).ToList();
+            return View(usuariosMiembros);
         }
 
         // GET: /Account/Register
@@ -42,16 +59,15 @@ namespace Ecommerce.Controllers
         }
 
         //
-        // POST: /Account/Register  
+        // POST: /MiPyme/Register  
         [AllowAnonymous]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        //[HttpPost]
+        public async Task<ActionResult> Register(RegisterMiPymeViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var user = new ApplicationUser { UserName = model.MiPymeName, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, "Zt3{77[H");
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);

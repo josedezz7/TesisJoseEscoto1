@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Ecommerce.DAL.Tbl_Shipping>
+
+@{
+    ViewBag.Title = "ShippingSearch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2></h2>
+
+<div class="card mb-3">
+    <div class="card-header">
+        <i class="fas fa-table"></i>
+        Orden
+
+    </div>
+    <br />
+    <div class="olContent f1"><h2 style="color:black">Buscar Producto/Categoria</h2></div>
+    <form method="post">
+        <div class="olSearch fr">
+            <input type="text" name="search" placeholder="Palabras Clave" class="inputComn form-control" />
+            <div class="searchIcon">
+                <button type="submit" class="btn btn-m btn-icon btn-success">
+                    <img src="~/Images/searchIcon.png" />
+                </button>
+            </div>
+        </div>
+    </form>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Numero</th>
+                        <th>Estado</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+
+                        foreach (var item in Model)
+                        {
+
+
+                        <td>@item.ShippingId</td>
+                        <td>@item.Status</td>
+                    }
+
+                    }
+
+                    </tbody>
+                </table>
+                @if ((Model == null) || (Model.Count() == 0))
+                {
+                    <h3>Orden no se encontro.</h3>
+                }
+            </div>
+
+        </div>
+    </div>

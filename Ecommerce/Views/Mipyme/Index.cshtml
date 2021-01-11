@@ -1,14 +1,14 @@
-﻿@model Ecommerce.Models.RegisterViewModel
+﻿@model  List<Ecommerce.Models.UserViewModel>
 @{
-    ViewBag.Title = "Registrarse";
+    ViewBag.Title = "Usuarios de Mipyme";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>@ViewBag.Title</h2>
 <div class="card mb-3">
     <div class="card-header">
-        <i class="fas fa-table"></i>
-        Detalle de Ordenes
+        
+        
 
     </div>
     <div class="card-body">
@@ -16,37 +16,23 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Cliente</th>
-                        <th>Direccion</th>
-                        <th>Ciudad</th>
-                        <th>Departamento</th>
-                        <th>Telefono</th>
-                        <th>Total</th>
-                        <th>Fecha</th>
-                        <th>Estado</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
                         <th>Accion</th>
-
                     </tr>
                 </thead>
                 <tbody>
                     @{
-
                         foreach (var item in Model)
                         {
 
                             <tr>
-                                <td>@(item?.Tbl_Members?.FirstName??"")</td>
-                                <td>@item.Address</td>
-                                <td>@item.City</td>
-                                <td>@item.Department</td>
-                                <td>@item.Telephone</td>
-                                <td>@item.AmountPaid</td>
-                                <td>@item.Date</td>
-                                <td>@item.Status</td>
+                                <td>@(item.Name)</td>
+                                <td>@item.Email</td>
                                 <td>
-                                    @Html.ActionLink("Ver Detalle", "ShippingDetail", new { shippingId = item.ShippingId })
+                                    @Html.ActionLink("Actualizar Informacion", "Modificar", new { shippingId = 0 })
                                     <br />
-                                    @Html.ActionLink("Actualizar Estado", "UpdateStatus", new { shippingId = item.ShippingId })
+                                    @Html.ActionLink("Suspender", "Eliminar", new { shippingId = 0})
                                 </td>
                             </tr>
                         }

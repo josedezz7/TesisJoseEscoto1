@@ -64,7 +64,7 @@ namespace Ecommerce.Controllers
             if (shippingId != null)
             {
                 var orden = _unitOfWork.GetRepositoryInstance<Tbl_Shipping>().getFirstorDefault(shippingId);
-                if (orden.Status == "Pendiente")
+                if (orden.Status.ToLower().Contains("Pendiente".ToLower()) || orden.Status.ToLower().Contains("PENDING"))
                 {
                     orden.Status = "En Proceso";
                 }
@@ -103,6 +103,7 @@ namespace Ecommerce.Controllers
         {
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Shipping>().GetAllRecord().Where(x=>x.MiPymeId==1));
         }
+        
 
         public ActionResult ProductEdit(int productId)
         {

@@ -32,7 +32,7 @@ namespace Ecommerce.Models.Home
 
         public HomeIndexViewModel CreateModel2(string search, int pageSize, int? page)
         {
-            var data2 = context.Tbl_Product.Include("Tbl_Members").ToList().ToPagedList(page ?? 1, pageSize);
+            var data2 = context.Tbl_Product.Include("Tbl_Members").Where(pro=> pro.ProductName.Contains(search)|| search== null).ToList().ToPagedList(page ?? 1, pageSize);
             SqlParameter[] pram = new SqlParameter[] {
                    new SqlParameter("@search",search??(object)DBNull.Value)
                    };

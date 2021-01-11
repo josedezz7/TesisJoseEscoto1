@@ -109,4 +109,9 @@ namespace Ecommerce.Models
         [Display(Name = "Correo electrónico")]
         public string Email { get; set; }
     }
+    public class UserViewModel
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+    }
 }
