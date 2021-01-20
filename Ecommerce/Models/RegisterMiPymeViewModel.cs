@@ -14,7 +14,6 @@ namespace Ecommerce.Models
         public string Email { get; set; }
 
         [Required]
-        [EmailAddress]
         [Display(Name = "Nombre MiPyme")]
         public string MiPymeName { get; set; }
     }
