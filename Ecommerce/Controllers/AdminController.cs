@@ -17,7 +17,12 @@ namespace Ecommerce.Controllers
         // GET: Admin
         public GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
 
-        public List<SelectListItem> GetCategory()
+        public ActionResult Index()
+        {
+           return RedirectToAction("Dashboard");
+        }
+
+            public List<SelectListItem> GetCategory()
         {
             List<SelectListItem> list = new List<SelectListItem>();
             var cat = _unitOfWork.GetRepositoryInstance<Tbl_Category>().GetAllRecord();

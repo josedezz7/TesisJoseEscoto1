@@ -16,22 +16,22 @@
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_MemberRole" Width="1.5" PointX="9.625" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Members" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Product" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Roles" Width="1.5" PointX="7.75" PointY="9.875" IsExpanded="true" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Shipping" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_ShippingDetail" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_SlideImage" Width="1.5" PointX="9.75" PointY="9.875" IsExpanded="true" />
         <AssociationConnector Association="dbEcommerceModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="dbEcommerceModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Cart__Produc__38996AB5" ManuallyRouted="false" />
-        <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Produ__Categ__286302EC" ManuallyRouted="false" />
         <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Shipp__Membe__30F848ED" ManuallyRouted="false" />
-        <AssociationConnector Association="dbEcommerceModel.FK_Tbl_Product_Tbl_Members" ManuallyRouted="false" />
         <AssociationConnector Association="dbEcommerceModel.FK_Tbl_Shipping_Tbl_Members" ManuallyRouted="false" />
         <AssociationConnector Association="dbEcommerceModel.FK_Tbl_Shipping_Tbl_Members1" ManuallyRouted="false" />
-        <AssociationConnector Association="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Product" ManuallyRouted="false" />
         <AssociationConnector Association="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Shipping" ManuallyRouted="false" />
         <AssociationConnector Association="dbEcommerceModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Product" Width="1.5" PointX="7" PointY="0.75" />
+        <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Cart__Produc__38996AB5" />
+        <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Produ__Categ__286302EC" />
+        <AssociationConnector Association="dbEcommerceModel.FK_Tbl_Product_Tbl_Members" />
+        <AssociationConnector Association="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Product" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

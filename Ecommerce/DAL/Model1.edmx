@@ -140,6 +140,7 @@
           <Property Name="Quantity" Type="int" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
           <Property Name="MemberId" Type="int" />
+          <Property Name="Existence" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Tbl_Roles">
           <Key>
@@ -481,7 +482,7 @@
           <Property Name="ProductId" Type="Int32" />
           <Property Name="MemberId" Type="Int32" />
           <Property Name="CartStatusId" Type="Int32" />
-          <NavigationProperty Name="Tbl_Product" Relationship="Self.FK__Tbl_Cart__Produc__38996AB5" FromRole="Tbl_Cart" ToRole="Tbl_Product" />
+          <NavigationProperty Name="Tbl_Product" Relationship="dbEcommerceModel.FK__Tbl_Cart__Produc__38996AB5" FromRole="Tbl_Cart" ToRole="Tbl_Product" />
         </EntityType>
         <EntityType Name="Tbl_CartStatus">
           <Key>
@@ -498,7 +499,7 @@
           <Property Name="CategoryName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="IsDelete" Type="Boolean" />
-          <NavigationProperty Name="Tbl_Product" Relationship="Self.FK__Tbl_Produ__Categ__286302EC" FromRole="Tbl_Category" ToRole="Tbl_Product" />
+          <NavigationProperty Name="Tbl_Product" Relationship="dbEcommerceModel.FK__Tbl_Produ__Categ__286302EC" FromRole="Tbl_Category" ToRole="Tbl_Product" />
         </EntityType>
         <EntityType Name="Tbl_MemberRole">
           <Key>
@@ -523,30 +524,9 @@
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="Type" Type="Int32" />
           <NavigationProperty Name="Tbl_Shipping" Relationship="Self.FK__Tbl_Shipp__Membe__30F848ED" FromRole="Tbl_Members" ToRole="Tbl_Shipping" />
-          <NavigationProperty Name="Tbl_Product" Relationship="Self.FK_Tbl_Product_Tbl_Members" FromRole="Tbl_Members" ToRole="Tbl_Product" />
           <NavigationProperty Name="Tbl_Shipping1" Relationship="Self.FK_Tbl_Shipping_Tbl_Members" FromRole="Tbl_Members" ToRole="Tbl_Shipping" />
           <NavigationProperty Name="Tbl_Shipping2" Relationship="Self.FK_Tbl_Shipping_Tbl_Members1" FromRole="Tbl_Members" ToRole="Tbl_Shipping" />
-        </EntityType>
-        <EntityType Name="Tbl_Product">
-          <Key>
-            <PropertyRef Name="ProductId" />
-          </Key>
-          <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="CategoryId" Type="Int32" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="IsDelete" Type="Boolean" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="ProductImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IsFeatured" Type="Boolean" />
-          <Property Name="Quantity" Type="Int32" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="MemberId" Type="Int32" />
-          <NavigationProperty Name="Tbl_Cart" Relationship="Self.FK__Tbl_Cart__Produc__38996AB5" FromRole="Tbl_Product" ToRole="Tbl_Cart" />
-          <NavigationProperty Name="Tbl_Category" Relationship="Self.FK__Tbl_Produ__Categ__286302EC" FromRole="Tbl_Product" ToRole="Tbl_Category" />
-          <NavigationProperty Name="Tbl_Members" Relationship="Self.FK_Tbl_Product_Tbl_Members" FromRole="Tbl_Product" ToRole="Tbl_Members" />
-          <NavigationProperty Name="Tbl_ShippingDetail" Relationship="Self.FK_Tbl_ShippingDetail_Tbl_Product" FromRole="Tbl_Product" ToRole="Tbl_ShippingDetail" />
+          <NavigationProperty Name="Tbl_Product" Relationship="dbEcommerceModel.FK_Tbl_Product_Tbl_Members" FromRole="Tbl_Members" ToRole="Tbl_Product" />
         </EntityType>
         <EntityType Name="Tbl_Roles">
           <Key>
@@ -582,9 +562,9 @@
           <Property Name="ShippingDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ShippingId" Type="Int32" Nullable="false" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Tbl_Product" Relationship="Self.FK_Tbl_ShippingDetail_Tbl_Product" FromRole="Tbl_ShippingDetail" ToRole="Tbl_Product" />
           <NavigationProperty Name="Tbl_Shipping" Relationship="Self.FK_Tbl_ShippingDetail_Tbl_Shipping" FromRole="Tbl_ShippingDetail" ToRole="Tbl_Shipping" />
           <Property Name="Quantity" Type="Int32" />
+          <NavigationProperty Name="Tbl_Product" Relationship="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Product" FromRole="Tbl_ShippingDetail" ToRole="Tbl_Product" />
         </EntityType>
         <EntityType Name="Tbl_SlideImage">
           <Key>
@@ -622,30 +602,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tbl_Cart__Produc__38996AB5">
-          <End Role="Tbl_Product" Type="Self.Tbl_Product" Multiplicity="0..1" />
-          <End Role="Tbl_Cart" Type="Self.Tbl_Cart" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tbl_Product">
-              <PropertyRef Name="ProductId" />
-            </Principal>
-            <Dependent Role="Tbl_Cart">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__Tbl_Produ__Categ__286302EC">
-          <End Role="Tbl_Category" Type="Self.Tbl_Category" Multiplicity="0..1" />
-          <End Role="Tbl_Product" Type="Self.Tbl_Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tbl_Category">
-              <PropertyRef Name="CategoryId" />
-            </Principal>
-            <Dependent Role="Tbl_Product">
-              <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Tbl_Shipp__Membe__30F848ED">
           <End Role="Tbl_Members" Type="Self.Tbl_Members" Multiplicity="0..1" />
           <End Role="Tbl_Shipping" Type="Self.Tbl_Shipping" Multiplicity="*" />
@@ -654,18 +610,6 @@
               <PropertyRef Name="MemberId" />
             </Principal>
             <Dependent Role="Tbl_Shipping">
-              <PropertyRef Name="MemberId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tbl_Product_Tbl_Members">
-          <End Role="Tbl_Members" Type="Self.Tbl_Members" Multiplicity="0..1" />
-          <End Role="Tbl_Product" Type="Self.Tbl_Product" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tbl_Members">
-              <PropertyRef Name="MemberId" />
-            </Principal>
-            <Dependent Role="Tbl_Product">
               <PropertyRef Name="MemberId" />
             </Dependent>
           </ReferentialConstraint>
@@ -691,18 +635,6 @@
             </Principal>
             <Dependent Role="Tbl_Shipping">
               <PropertyRef Name="MiPymeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tbl_ShippingDetail_Tbl_Product">
-          <End Role="Tbl_Product" Type="Self.Tbl_Product" Multiplicity="1" />
-          <End Role="Tbl_ShippingDetail" Type="Self.Tbl_ShippingDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tbl_Product">
-              <PropertyRef Name="ProductId" />
-            </Principal>
-            <Dependent Role="Tbl_ShippingDetail">
-              <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -734,7 +666,6 @@
           <EntitySet Name="Tbl_Category" EntityType="Self.Tbl_Category" />
           <EntitySet Name="Tbl_MemberRole" EntityType="Self.Tbl_MemberRole" />
           <EntitySet Name="Tbl_Members" EntityType="Self.Tbl_Members" />
-          <EntitySet Name="Tbl_Product" EntityType="Self.Tbl_Product" />
           <EntitySet Name="Tbl_Roles" EntityType="Self.Tbl_Roles" />
           <EntitySet Name="Tbl_Shipping" EntityType="Self.Tbl_Shipping" />
           <EntitySet Name="Tbl_ShippingDetail" EntityType="Self.Tbl_ShippingDetail" />
@@ -747,21 +678,9 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Cart__Produc__38996AB5" Association="Self.FK__Tbl_Cart__Produc__38996AB5">
-            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
-            <End Role="Tbl_Cart" EntitySet="Tbl_Cart" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Produ__Categ__286302EC" Association="Self.FK__Tbl_Produ__Categ__286302EC">
-            <End Role="Tbl_Category" EntitySet="Tbl_Category" />
-            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
-          </AssociationSet>
           <AssociationSet Name="FK__Tbl_Shipp__Membe__30F848ED" Association="Self.FK__Tbl_Shipp__Membe__30F848ED">
             <End Role="Tbl_Members" EntitySet="Tbl_Members" />
             <End Role="Tbl_Shipping" EntitySet="Tbl_Shipping" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tbl_Product_Tbl_Members" Association="Self.FK_Tbl_Product_Tbl_Members">
-            <End Role="Tbl_Members" EntitySet="Tbl_Members" />
-            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
           </AssociationSet>
           <AssociationSet Name="FK_Tbl_Shipping_Tbl_Members" Association="Self.FK_Tbl_Shipping_Tbl_Members">
             <End Role="Tbl_Members" EntitySet="Tbl_Members" />
@@ -771,10 +690,6 @@
             <End Role="Tbl_Members" EntitySet="Tbl_Members" />
             <End Role="Tbl_Shipping" EntitySet="Tbl_Shipping" />
           </AssociationSet>
-          <AssociationSet Name="FK_Tbl_ShippingDetail_Tbl_Product" Association="Self.FK_Tbl_ShippingDetail_Tbl_Product">
-            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
-            <End Role="Tbl_ShippingDetail" EntitySet="Tbl_ShippingDetail" />
-          </AssociationSet>
           <AssociationSet Name="FK_Tbl_ShippingDetail_Tbl_Shipping" Association="Self.FK_Tbl_ShippingDetail_Tbl_Shipping">
             <End Role="Tbl_Shipping" EntitySet="Tbl_Shipping" />
             <End Role="Tbl_ShippingDetail" EntitySet="Tbl_ShippingDetail" />
@@ -783,7 +698,94 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
           </AssociationSet>
+          <EntitySet Name="Tbl_Product" EntityType="dbEcommerceModel.Tbl_Product" />
+          <AssociationSet Name="FK__Tbl_Cart__Produc__38996AB5" Association="dbEcommerceModel.FK__Tbl_Cart__Produc__38996AB5">
+            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
+            <End Role="Tbl_Cart" EntitySet="Tbl_Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Produ__Categ__286302EC" Association="dbEcommerceModel.FK__Tbl_Produ__Categ__286302EC">
+            <End Role="Tbl_Category" EntitySet="Tbl_Category" />
+            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Product_Tbl_Members" Association="dbEcommerceModel.FK_Tbl_Product_Tbl_Members">
+            <End Role="Tbl_Members" EntitySet="Tbl_Members" />
+            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_ShippingDetail_Tbl_Product" Association="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Product">
+            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
+            <End Role="Tbl_ShippingDetail" EntitySet="Tbl_ShippingDetail" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Tbl_Product">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ProductImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsFeatured" Type="Boolean" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MemberId" Type="Int32" />
+          <Property Name="Existence" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Cart" Relationship="dbEcommerceModel.FK__Tbl_Cart__Produc__38996AB5" FromRole="Tbl_Product" ToRole="Tbl_Cart" />
+          <NavigationProperty Name="Tbl_Category" Relationship="dbEcommerceModel.FK__Tbl_Produ__Categ__286302EC" FromRole="Tbl_Product" ToRole="Tbl_Category" />
+          <NavigationProperty Name="Tbl_Members" Relationship="dbEcommerceModel.FK_Tbl_Product_Tbl_Members" FromRole="Tbl_Product" ToRole="Tbl_Members" />
+          <NavigationProperty Name="Tbl_ShippingDetail" Relationship="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Product" FromRole="Tbl_Product" ToRole="Tbl_ShippingDetail" />
+        </EntityType>
+        <Association Name="FK__Tbl_Cart__Produc__38996AB5">
+          <End Type="dbEcommerceModel.Tbl_Product" Role="Tbl_Product" Multiplicity="0..1" />
+          <End Type="dbEcommerceModel.Tbl_Cart" Role="Tbl_Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Tbl_Cart">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Produ__Categ__286302EC">
+          <End Type="dbEcommerceModel.Tbl_Category" Role="Tbl_Category" Multiplicity="0..1" />
+          <End Type="dbEcommerceModel.Tbl_Product" Role="Tbl_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Tbl_Product">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Product_Tbl_Members">
+          <End Type="dbEcommerceModel.Tbl_Members" Role="Tbl_Members" Multiplicity="0..1" />
+          <End Type="dbEcommerceModel.Tbl_Product" Role="Tbl_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Members">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Tbl_Product">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_ShippingDetail_Tbl_Product">
+          <End Type="dbEcommerceModel.Tbl_Product" Role="Tbl_Product" Multiplicity="1" />
+          <End Type="dbEcommerceModel.Tbl_ShippingDetail" Role="Tbl_ShippingDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Tbl_ShippingDetail">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -909,24 +911,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Tbl_Product">
-            <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_Product">
-              <MappingFragment StoreEntitySet="Tbl_Product">
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
-                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Tbl_Roles">
             <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_Roles">
               <MappingFragment StoreEntitySet="Tbl_Roles">
@@ -979,6 +963,25 @@
               <ScalarProperty Name="Id" ColumnName="UserId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Tbl_Product">
+            <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_Product">
+              <MappingFragment StoreEntitySet="Tbl_Product">
+                <ScalarProperty Name="Existence" ColumnName="Existence" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+                <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
