@@ -8,34 +8,31 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using static Ecommerce.ApplicationSignInManager;
 
 namespace Ecommerce.Controllers
 {
+    //[Authorize(Users = "10b67bc1-b50d-4c8a-b59c-2b4603fad3a8")]
     public class MipymeController : Controller
     {
-        List<string> adminUsers = new List<string> {
-        ""
-        };
-        List<UserViewModel> usuariosMiembros = new List<UserViewModel> {
-        new UserViewModel  
-            {
-                    Name = "Beestore",
-                    Email = "beestore@gmail.com"
-             }
-        };
+
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationRoleManager _roleManager;
         dbEcommerceEntities1 ctx = new dbEcommerceEntities1();
 
         // GET: Mipyme
         public ActionResult Index()
         {
-            List<UserViewModel> usuarios = ctx.AspNetUsers.Where(aspnetUser => adminUsers.Contains(aspnetUser.Id)).Select(aspnetUser => new UserViewModel
+            //UserManager.AddToRole("54f5e4f3-2b6c-4430-a871-73b386aa9b4a", "MiPymes");
+
+            List<UserViewModel> usuarios = ctx.AspNetUsers.Where(aspnetUser => aspnetUser.AspNetRoles.Count(netRole => netRole.Name.Contains("MiPymes")) > 0).Select(aspnetUser => new UserViewModel
             {
                 Name = aspnetUser.UserName,
                 Email = aspnetUser.Email
             }).ToList();
-            return View(usuariosMiembros);
+            return View(usuarios);
         }
 
         // GET: /Account/Register
@@ -57,7 +54,18 @@ namespace Ecommerce.Controllers
                 _signInManager = value;
             }
         }
+        protected ApplicationRoleManager AppRoleManager
+        {
+            get
+            {
+                return _roleManager ?? Request.GetOwinContext().GetUserManager<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
 
+        }
         //
         // POST: /MiPyme/Register  
         [AllowAnonymous]
@@ -70,6 +78,7 @@ namespace Ecommerce.Controllers
                 var result = await UserManager.CreateAsync(user, "Zt3{77[H");
                 if (result.Succeeded)
                 {
+                    UserManager.AddToRole(user.Id, "MiPymes");
                     //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // Para obtener más información sobre cómo habilitar la confirmación de cuentas y el restablecimiento de contraseña, visite https://go.microsoft.com/fwlink/?LinkID=320771
