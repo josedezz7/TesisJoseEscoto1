@@ -25,7 +25,6 @@ namespace Ecommerce.Controllers
         // GET: Mipyme
         public ActionResult Index()
         {
-            //UserManager.AddToRole("54f5e4f3-2b6c-4430-a871-73b386aa9b4a", "MiPymes");
 
             List<UserViewModel> usuarios = ctx.AspNetUsers.Where(aspnetUser => aspnetUser.AspNetRoles.Count(netRole => netRole.Name.Contains("MiPymes")) > 0).Select(aspnetUser => new UserViewModel
             {
