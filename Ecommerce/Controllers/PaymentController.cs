@@ -22,12 +22,20 @@ namespace Ecommerce.Controllers
 
         [HttpGet]
         [Route("Payment/PaypalPagoExitoso/{token}/{PayerID}")]
-        public async Task<ActionResult> PaypalPagoExitoso( string token, string PayerID)
+        public async Task<ActionResult> PaypalPagoExitoso(string token, string PayerID)
         {
+            List<Models.Home.Item> items = (List<Models.Home.Item>)Session["cart"];
+            foreach (var item in items)
+            {
+                var prod = ctx.Tbl_Product.FirstOrDefault(pro => pro.ProductId == item.Product.ProductId);
+                prod.Quantity += (item.Quantity * -1);
+                ctx.SaveChanges();
+            }
+            Session["cart"] = null;
             return View("SuccessView", Session["orderId"]);
         }
 
-       [HttpPost]
+        [HttpPost]
         public ActionResult CrearOrden(string address, string city, string department, string telephone)
         {
             SaveOrder(new OrderViewModel
@@ -38,7 +46,7 @@ namespace Ecommerce.Controllers
                 Telephone = telephone
             });
 
-            return RedirectToAction("PaymentWithPaypal",1052);
+            return RedirectToAction("PaymentWithPaypal", 1052);
         }
 
         // GET: Payment
@@ -48,7 +56,7 @@ namespace Ecommerce.Controllers
         public async Task<ActionResult> PaymentWithPaypal(string id)
         {
             try
-            {            
+            {
                 string PayerId = Request.Params["PayerID"];
 
                 if (string.IsNullOrEmpty(PayerId))
@@ -69,7 +77,7 @@ namespace Ecommerce.Controllers
                         if (lnk.Rel.ToLower().Trim().Equals("approve"))
                         {
                             paypalRedirectURL = lnk.Href;
-                          
+
                             return Json(paypalRedirectURL, JsonRequestBehavior.AllowGet);
                         }
                     }
@@ -114,19 +122,19 @@ namespace Ecommerce.Controllers
                         MiPymeId = item.Key,
                         PaymentType = "PayPal",
                         Status = "PENDIENTE",
-                        Telephone=model.Telephone,
-                        Date=DateTime.Now
+                        Telephone = model.Telephone,
+                        Date = DateTime.Now
                     };
 
                     decimal? total = 0;
-                    
-                    foreach(var product in item)
+
+                    foreach (var product in item)
                     {
                         var shippingDetail = new Tbl_ShippingDetail
                         {
                             ProductId = product.Product.ProductId,
                             ShippingId = newOrder.ShippingId,
-                            Quantity=product.Quantity
+                            Quantity = product.Quantity
                         };
                         total += shippingDetail.Quantity * product.Product.Price;
                         newOrder.Tbl_ShippingDetail.Add(shippingDetail);
@@ -145,25 +153,25 @@ namespace Ecommerce.Controllers
              return this.payment.Execute(apicontext, paymentExecution);
          }
  */
-       /* public async Task<PayPalHttp.HttpResponse> PaypalPagoExitoso()
-        {
-            var request = new OrdersCaptureRequest("APPROVED-ORDER-ID");
-            request.RequestBody(new OrderActionRequest());
-            PayPalHttp.HttpResponse response = await PaypalClient.client().Execute(request);
-            var statusCode = response.StatusCode;
-            Order result = response.Result<Order>();
-            Console.WriteLine("Status: {0}", result.Status);
-            Console.WriteLine("Capture Id: {0}", result.Id);
-            return response;
+        /* public async Task<PayPalHttp.HttpResponse> PaypalPagoExitoso()
+         {
+             var request = new OrdersCaptureRequest("APPROVED-ORDER-ID");
+             request.RequestBody(new OrderActionRequest());
+             PayPalHttp.HttpResponse response = await PaypalClient.client().Execute(request);
+             var statusCode = response.StatusCode;
+             Order result = response.Result<Order>();
+             Console.WriteLine("Status: {0}", result.Status);
+             Console.WriteLine("Capture Id: {0}", result.Id);
+             return response;
 
-        }*/
+         }*/
         public async Task<ActionResult> PaypalPagoFallido()
         {
-            
+
             return View("FailureView");
         }
 
-        
+
         private async Task<Order> CreatePaymentAsync(string orderId)
         {
             decimal total = 0;
@@ -213,7 +221,7 @@ namespace Ecommerce.Controllers
                 },
                     ApplicationContext = new ApplicationContext()
                     {
-                        ReturnUrl = baseURi + "PaypalPagoExitoso/"+ orderId,
+                        ReturnUrl = baseURi + "PaypalPagoExitoso/" + orderId,
                         CancelUrl = baseURi + "PaypalPagoFallido"
                     }
                 };
