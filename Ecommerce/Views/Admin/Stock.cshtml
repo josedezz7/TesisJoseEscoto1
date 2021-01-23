@@ -1,0 +1,62 @@
+﻿@model List< Ecommerce.Models.StockXItemViewModel >
+
+@{
+    ViewBag.Title = "Stock";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Inventario</li>
+    </ol>
+    <!-- DataTables Example -->
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+           Inventario
+
+
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            @*<th></th>*@
+                            <th>ProductoId</th>
+                            <th>Nombre Producto</th>
+                            <th>Existencia</th>
+                            <th>Ventas</th>
+                            <th>Movimiento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                @*<td>@(Model.IndexOf(item)+1)</td>*@
+                                <td>@item.ProductId</td>
+                                <td>@item.ProductName</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.Sales</td>
+                                <td>
+                                    @Html.ActionLink("ProductEdit", "Admin", new { productId = item.ProductId })
+                                </td>
+
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>

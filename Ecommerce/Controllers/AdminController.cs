@@ -20,10 +20,10 @@ namespace Ecommerce.Controllers
 
         public ActionResult Index()
         {
-           return RedirectToAction("Dashboard");
+            return RedirectToAction("Dashboard");
         }
 
-            public List<SelectListItem> GetCategory()
+        public List<SelectListItem> GetCategory()
         {
             List<SelectListItem> list = new List<SelectListItem>();
             var cat = _unitOfWork.GetRepositoryInstance<Tbl_Category>().GetAllRecord();
@@ -54,11 +54,11 @@ namespace Ecommerce.Controllers
         {
             CategoryDetail cd;
 
-                if(categoryId != null)
+            if (categoryId != null)
             {
                 cd = JsonConvert.DeserializeObject<CategoryDetail>(JsonConvert.SerializeObject(_unitOfWork.GetRepositoryInstance<Tbl_Category>().getFirstorDefault(categoryId)));
             }
-                else
+            else
             {
                 cd = new CategoryDetail();
             }
@@ -78,7 +78,7 @@ namespace Ecommerce.Controllers
                 {
                     orden.Status = "Enviado";
                 }
-                else if(orden.Status == "Enviado")
+                else if (orden.Status == "Enviado")
                 {
                     orden.Status = "Entregado";
                 }
@@ -107,9 +107,21 @@ namespace Ecommerce.Controllers
 
         public ActionResult Shipping()
         {
-            return View(_unitOfWork.GetRepositoryInstance<Tbl_Shipping>().GetAllRecord().Where(x=>x.MiPymeId==1));
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Shipping>().GetAllRecord().Where(x => x.MiPymeId == 1));
         }
-        
+
+        public ActionResult Stock()
+        {
+            List<StockXItemViewModel> stock = ctx.Tbl_Product.Select(pro => new StockXItemViewModel
+            {
+                ProductId = pro.ProductId,
+                ProductName = pro.ProductName,
+                ProductImage = pro.ProductImage,
+                Quantity = pro.Quantity??0,
+                Sales = pro.Tbl_ShippingDetail.Select(shpDet=> shpDet.Quantity).Sum()??0,
+            }).ToList();
+            return View(stock);
+        }
 
         public ActionResult ProductEdit(int productId)
         {
@@ -142,10 +154,10 @@ namespace Ecommerce.Controllers
                 string path = System.IO.Path.Combine(Server.MapPath("~/ProductImages/"), pic);
                 // file is uploaded
                 file.SaveAs(path);
-            producto.ProductImage = pic;
+                producto.ProductImage = pic;
             }
             ctx.SaveChanges();
-           
+
             return RedirectToAction("Product");
         }
 

@@ -260,6 +260,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RegisterMiPymeViewModel.cs" />
     <Compile Include="Models\Shopping.cs" />
+    <Compile Include="Models\StockXItemViewModel.cs" />
     <Compile Include="PaypalClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\GenericRepository.cs" />
@@ -3733,6 +3734,7 @@
     <Content Include="Views\Mipyme\Index.cshtml" />
     <Content Include="Views\Mipyme\Register.cshtml" />
     <Content Include="Views\Home\ShippingSearch.cshtml" />
+    <Content Include="Views\Admin\Stock.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
