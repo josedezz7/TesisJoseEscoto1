@@ -3532,6 +3532,9 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\armenia_syunik_khustup_hayk_photography-wallpaper-2880x1620.jpg" />
+    <Content Include="Images\banner1.jpg" />
+    <Content Include="Images\banner2.jpg" />
+    <Content Include="Images\Frontpage_STHREE.jpg" />
     <Content Include="Images\Nintendo64.jpg" />
     <Content Include="Images\photo5382142781725715700.jpg" />
     <Content Include="Images\photo5764775542611095281.jpg" />
