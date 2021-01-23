@@ -89,7 +89,7 @@ namespace Ecommerce.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return (returnUrl != null && returnUrl.Length > 0) ? RedirectToLocal(returnUrl) : isMiPymes ? RedirectToAction("Dashboard", "Admin") : RedirectToLocal(returnUrl);
+                    return (returnUrl != null && returnUrl.Length > 0) ? RedirectToLocal(returnUrl) : isMiPymes ? RedirectToAction("Product", "Admin") : RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
