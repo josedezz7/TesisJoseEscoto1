@@ -16,6 +16,7 @@ namespace Ecommerce.Controllers
     {
         // GET: Admin
         public GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
+        dbEcommerceEntities1 ctx = new dbEcommerceEntities1();
 
         public ActionResult Index()
         {
@@ -124,6 +125,16 @@ namespace Ecommerce.Controllers
         [HttpPost]
         public ActionResult ProductEdit(Tbl_Product tbl, HttpPostedFileBase file)
         {
+
+            var producto = ctx.Tbl_Product.FirstOrDefault(prod => prod.ProductId == tbl.ProductId);
+            producto.ProductName = tbl.ProductName;
+            producto.CategoryId = tbl.CategoryId;
+            producto.IsActive = tbl.IsActive;
+            producto.IsDelete = tbl.IsDelete;
+            producto.IsFeatured = tbl.IsFeatured;
+            producto.Quantity = tbl.Quantity;
+            producto.Price = tbl.Price;
+            producto.Existence = tbl.Existence;
             string pic = null;
             if (file != null)
             {
@@ -131,10 +142,10 @@ namespace Ecommerce.Controllers
                 string path = System.IO.Path.Combine(Server.MapPath("~/ProductImages/"), pic);
                 // file is uploaded
                 file.SaveAs(path);
+            producto.ProductImage = pic;
             }
-            tbl.ProductImage = file != null ? pic : tbl.ProductImage;
-            tbl.ModifiedDate = DateTime.Now;
-            _unitOfWork.GetRepositoryInstance<Tbl_Product>().Update(tbl);
+            ctx.SaveChanges();
+           
             return RedirectToAction("Product");
         }
 
