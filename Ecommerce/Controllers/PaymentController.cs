@@ -186,13 +186,13 @@ namespace Ecommerce.Controllers
                 List<Models.Home.Item> cart = (List<Models.Home.Item>)(Session["cart"]);
                 foreach (var item in cart)
                 {
-                    total += ((item.Product.Price * item.Product.Quantity) ?? 0);
+                    total += ((item.Product.Price * item.Quantity) ?? 0);
                     ItemLIst.Add(new PayPalCheckoutSdk.Orders.Item()
                     {
                         Description = "Descripcion",
                         UnitAmount = new Money { CurrencyCode = "USD", Value = item.Product.Price.ToString() },//item.Product.Price,
                         Name = item.Product.ProductName.ToString(),
-                        Quantity = item.Product.Quantity.ToString(),
+                        Quantity = item.Quantity.ToString(),
                         Sku = "sku"
                     });
                 }
