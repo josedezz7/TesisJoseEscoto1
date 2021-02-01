@@ -121,25 +121,33 @@
                     }
                 </div>
             </div>*@
-                                <div class="row">
-                                    <div class="col-md-4 col-lg-4 col-xxl-4">
-                                        <label class="font-size-h6 text-muted font-weight-bolder">Precio:</label>
-                                    </div>
-                                    <div class="col-md-5 col-lg-5 col-xxl-5">
-                                        <label class="font-size-h6 font-weight-bolder">@item.Price</label>
-                                    </div>
+                            <div class="row">
+                                <div class="col-md-4 col-lg-4 col-xxl-4">
+                                    <label class="font-size-h6 text-muted font-weight-bolder">Precio:</label>
+                                </div>
+                                <div class="col-md-5 col-lg-5 col-xxl-5">
+                                    <label class="font-size-h6 font-weight-bolder">@item.Price</label>
+                                </div>
 
 
 
-                                    <div class="col-md-2 col-lg-2 col-xxl-2">
-                                        @if (item.Quantity > 0)
+                                <div class="col-md-5 col-lg-5 col-xxl-5">
+                                    @if (item.Quantity > 0)
+                                    {
+                                        using (Html.BeginForm("ViewProductDetail", "Home", new { productId = item.ProductId, url = "Index" }, FormMethod.Post))
                                         {
-                                            using (Html.BeginForm("AddToCart", "Home", new { productId = item.ProductId, url = "Index" }, FormMethod.Post))
-                                            {
-                                                <button tupe="submit" class="btn btn-light-success font-weight-bold"><i class="fa fa-shopping-cart"></i></button>
-                                            }
+                                            <button tupe="submit" class="btn btn-light-success font-weight-bold"><i class="fa fa-info-circle"></i></button>
                                         }
-                                    </div>
+                                    }
+                                </div>
+
+                                <div class="col-md-2 col-lg-2 col-xxl-2" style="margin-left: 135px;">
+                                    @using (Html.BeginForm("AddToCart", "Home", new { productId = item.ProductId, url = "Index" }, FormMethod.Post))
+                                    {
+                                    <button tupe="submit" class="btn btn-light-success font-weight-bold"><i class="fa fa-shopping-cart"></i></button>
+                                    }
+                                </div>
+ 
                                 </div>
 
                             </div>

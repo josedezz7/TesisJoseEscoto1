@@ -14,6 +14,7 @@ namespace Ecommerce.Controllers
     public class HomeController : Controller
     {
         dbEcommerceEntities1 ctx = new dbEcommerceEntities1();
+        public GenericUnitOfWork _unitOfWork = new GenericUnitOfWork();
         public ActionResult Index(string search, int? page)
         {
             HomeIndexViewModel model = new HomeIndexViewModel();
@@ -110,6 +111,12 @@ namespace Ecommerce.Controllers
                 Session["cart"] = cart;
             }
             return Redirect(url);
+        }
+
+        public ActionResult ViewProductDetail(int productId)
+        {
+            var model = _unitOfWork.GetRepositoryInstance<Tbl_Product>().getFirstorDefault(productId);
+            return View(model);
         }
             public ActionResult RemoveFromCart(int productId)
             {

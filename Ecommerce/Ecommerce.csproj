@@ -3745,6 +3745,7 @@
     <Content Include="Views\Admin\ProductCharacteristic.cshtml" />
     <Content Include="Views\Admin\ProductCharacteristicEdit.cshtml" />
     <Content Include="Views\Admin\CharacteristicAdd.cshtml" />
+    <Content Include="Views\Home\ViewProductDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

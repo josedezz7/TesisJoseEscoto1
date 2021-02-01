@@ -1,0 +1,55 @@
+﻿@model Ecommerce.DAL.Tbl_Product
+@{
+    ViewBag.Title = "ViewProductDetail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="panel panel-default">
+        <div class="panel-heading">Detalle del producto</div>
+        <div class="text-center rounded mb-7">
+            <img src="~/ProductImages/@Model.ProductImage" class="mw-100 h-150px" />
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">Nombre del producto: @Model.ProductName</li>
+            <li class="list-group-item">Categoria: @Model.Tbl_Category.CategoryName </li>
+            <li class="list-group-item">Precio: @Model.Price</li>
+            <li class="list-group-item">Descripcion del producto: @Model.Description</li>
+        </ul>
+
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Detalle de Caracteristicas
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+
+                            foreach (var item in Model.Tbl_Product_Characteristics)
+                            {
+
+                                <tr>
+                                    <td>@item.Characteristic</td>
+                                </tr>
+                            }
+
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
