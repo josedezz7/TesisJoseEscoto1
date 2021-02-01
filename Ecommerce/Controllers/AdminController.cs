@@ -1,5 +1,6 @@
 ﻿using Ecommerce.DAL;
 using Ecommerce.Models;
+using Ecommerce.Models.Characteristic;
 using Ecommerce.Repository;
 using Newtonsoft.Json;
 using PayPalCheckoutSdk.Orders;
@@ -129,6 +130,21 @@ namespace Ecommerce.Controllers
             return View(_unitOfWork.GetRepositoryInstance<Tbl_Product>().getFirstorDefault(productId));
         }
 
+        public ActionResult ProductCharacteristic(int productId)
+        {
+            var model = new Charecteristic
+            {
+                productId = productId,
+                Characteristics = _unitOfWork.GetRepositoryInstance<Tbl_Product_Characteristics>().GetProduct().Where(x => x.ProductId == productId)
+            };
+            return View(model);
+        }
+
+        public ActionResult ProductCharacteristicEdit(int id)
+        {
+            return View(_unitOfWork.GetRepositoryInstance<Tbl_Product_Characteristics>().getFirstorDefault(id));
+        }
+
         public ActionResult ShippingDetail(int shippingId)
         {
             return View(_unitOfWork.GetRepositoryInstance<Tbl_ShippingDetail>().GetAllRecord().Where(x => x.ShippingId == shippingId));
@@ -162,10 +178,28 @@ namespace Ecommerce.Controllers
             return RedirectToAction("Product");
         }
 
+        [HttpPost]
+        public ActionResult ProductCharacteristicEdit(Tbl_Product_Characteristics tbl)
+        {
+
+            var characteristic = ctx.Tbl_Product_Characteristics.FirstOrDefault(x => x.CharacteristicId == tbl.CharacteristicId);
+
+            characteristic.Characteristic = tbl.Characteristic;
+            string pic = null;
+
+            ctx.SaveChanges();
+
+            return RedirectToAction("ProductCharacteristic", new { @productId = tbl.ProductId });
+        }
+
         public ActionResult ProductAdd()
         {
             ViewBag.CategoryList = GetCategory();
             return View();
+        }
+        public ActionResult CharacteristicAdd(int id)
+        {
+            return View(new Tbl_Product_Characteristics { ProductId = id });
         }
 
         [HttpPost]
@@ -187,7 +221,13 @@ namespace Ecommerce.Controllers
         }
 
 
+        [HttpPost]
+        public ActionResult CharacteristicAdd(Tbl_Product_Characteristics tbl)
+        {
 
+            _unitOfWork.GetRepositoryInstance<Tbl_Product_Characteristics>().Add(tbl);
+            return RedirectToAction("ProductCharacteristic", new { @productId = tbl.ProductId });
+        }
 
     }
 }

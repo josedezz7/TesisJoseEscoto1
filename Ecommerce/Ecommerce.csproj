@@ -256,6 +256,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CategoryDetail.cs" />
+    <Compile Include="Models\Characteristic\Charecteristic.cs" />
     <Compile Include="Models\Home\HomeIndexViewModel.cs" />
     <Compile Include="Models\Home\Item.cs" />
     <Compile Include="Models\Home\OrderViewModel.cs" />
@@ -3741,6 +3742,9 @@
     <Content Include="Views\Mipyme\Register.cshtml" />
     <Content Include="Views\Home\ShippingSearch.cshtml" />
     <Content Include="Views\Admin\Stock.cshtml" />
+    <Content Include="Views\Admin\ProductCharacteristic.cshtml" />
+    <Content Include="Views\Admin\ProductCharacteristicEdit.cshtml" />
+    <Content Include="Views\Admin\CharacteristicAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

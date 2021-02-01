@@ -1,17 +1,16 @@
-﻿@model IEnumerable<Ecommerce.DAL.Tbl_Product>
+﻿@model Ecommerce.Models.Characteristic.Charecteristic
 
 @{
-    ViewBag.Title = "Product";
+    ViewBag.Title = "ProductCharacteristic";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <div class="card mb-3">
     <div class="card-header">
         <i class="fas fa-table"></i>
-        Detalle de Productos
+        Detalle de Caracteristicas
 
-        <a href="../Admin/ProductAdd" class="btn btn-info pull-right fa fa-plus">Agregar Productos</a>
-
+        <a href="@Url.Action("CharacteristicAdd", "Admin", new { @id = Model.productId })" class="btn btn-info pull-right fa fa-plus">Agregar Caracteristica</a>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -19,7 +18,7 @@
                 <thead>
                     <tr>
                         <th>Sr. No.</th>
-                        <th>Nombre de Producto</th>
+                        <th>Caracteristica</th>
                         <th>Accion</th>
 
                     </tr>
@@ -27,22 +26,21 @@
                 <tfoot>
                     <tr>
                         <th>Sr. No.</th>
-                        <th>Nombre de Producto</th>
+                        <th>Caracteristica</th>
                         <th>Accion</th>
                     </tr>
                 </tfoot>
                 <tbody>
                     @{int count = 1;
 
-                        foreach (var item in Model)
+                        foreach (var item in Model.Characteristics)
                         {
 
                             <tr>
                                 <td>@count</td>
-                                <td>@item.ProductName</td>
+                                <td>@item.Characteristic</td>
                                 <td>
-                                    @Html.ActionLink("Edit", "ProductEdit", new { productId = item.ProductId })
-                                    @Html.ActionLink("Characteristics", "ProductCharacteristic", new { productId = item.ProductId })
+                                    @Html.ActionLink("Edit", "ProductCharacteristicEdit", new { id =   item.CharacteristicId })
                                 </td>
                             </tr>
                             count++;
