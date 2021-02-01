@@ -141,6 +141,15 @@
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
           <Property Name="MemberId" Type="int" />
           <Property Name="Existence" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Tbl_Product_Characteristics">
+          <Key>
+            <PropertyRef Name="CharacteristicId" />
+          </Key>
+          <Property Name="CharacteristicId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Characteristic" Type="varchar" MaxLength="255" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Tbl_Roles">
           <Key>
@@ -173,6 +182,7 @@
           <Property Name="ShippingId" Type="int" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" />
+          <Property Name="Observation" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="Tbl_SlideImage">
           <Key>
@@ -203,6 +213,18 @@
             </Principal>
             <Dependent Role="Tbl_Product">
               <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Produ__Produ__3E1D39E1">
+          <End Role="Tbl_Product" Type="Self.Tbl_Product" Multiplicity="1" />
+          <End Role="Tbl_Product_Characteristics" Type="Self.Tbl_Product_Characteristics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Tbl_Product_Characteristics">
+              <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -348,6 +370,7 @@
           <EntitySet Name="Tbl_MemberRole" EntityType="Self.Tbl_MemberRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Members" EntityType="Self.Tbl_Members" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Product" EntityType="Self.Tbl_Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Product_Characteristics" EntityType="Self.Tbl_Product_Characteristics" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Roles" EntityType="Self.Tbl_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Shipping" EntityType="Self.Tbl_Shipping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_ShippingDetail" EntityType="Self.Tbl_ShippingDetail" Schema="dbo" store:Type="Tables" />
@@ -359,6 +382,10 @@
           <AssociationSet Name="FK__Tbl_Produ__Categ__286302EC" Association="Self.FK__Tbl_Produ__Categ__286302EC">
             <End Role="Tbl_Category" EntitySet="Tbl_Category" />
             <End Role="Tbl_Product" EntitySet="Tbl_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Produ__Produ__3E1D39E1" Association="Self.FK__Tbl_Produ__Produ__3E1D39E1">
+            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
+            <End Role="Tbl_Product_Characteristics" EntitySet="Tbl_Product_Characteristics" />
           </AssociationSet>
           <AssociationSet Name="FK__Tbl_Shipp__Membe__30F848ED" Association="Self.FK__Tbl_Shipp__Membe__30F848ED">
             <End Role="Tbl_Members" EntitySet="Tbl_Members" />
@@ -405,33 +432,100 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbEcommerceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dbEcommerceEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="dbEcommerceModel.C__MigrationHistory" />
+          <EntitySet Name="AspNetRoles" EntityType="dbEcommerceModel.AspNetRoles" />
+          <EntitySet Name="AspNetUserClaims" EntityType="dbEcommerceModel.AspNetUserClaims" />
+          <EntitySet Name="AspNetUserLogins" EntityType="dbEcommerceModel.AspNetUserLogins" />
+          <EntitySet Name="AspNetUsers" EntityType="dbEcommerceModel.AspNetUsers" />
+          <EntitySet Name="sysdiagrams" EntityType="dbEcommerceModel.sysdiagrams" />
+          <EntitySet Name="Tbl_Cart" EntityType="dbEcommerceModel.Tbl_Cart" />
+          <EntitySet Name="Tbl_CartStatus" EntityType="dbEcommerceModel.Tbl_CartStatus" />
+          <EntitySet Name="Tbl_Category" EntityType="dbEcommerceModel.Tbl_Category" />
+          <EntitySet Name="Tbl_MemberRole" EntityType="dbEcommerceModel.Tbl_MemberRole" />
+          <EntitySet Name="Tbl_Members" EntityType="dbEcommerceModel.Tbl_Members" />
+          <EntitySet Name="Tbl_Product" EntityType="dbEcommerceModel.Tbl_Product" />
+          <EntitySet Name="Tbl_Product_Characteristics" EntityType="dbEcommerceModel.Tbl_Product_Characteristics" />
+          <EntitySet Name="Tbl_Roles" EntityType="dbEcommerceModel.Tbl_Roles" />
+          <EntitySet Name="Tbl_Shipping" EntityType="dbEcommerceModel.Tbl_Shipping" />
+          <EntitySet Name="Tbl_ShippingDetail" EntityType="dbEcommerceModel.Tbl_ShippingDetail" />
+          <EntitySet Name="Tbl_SlideImage" EntityType="dbEcommerceModel.Tbl_SlideImage" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="dbEcommerceModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="dbEcommerceModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Cart__Produc__38996AB5" Association="dbEcommerceModel.FK__Tbl_Cart__Produc__38996AB5">
+            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
+            <End Role="Tbl_Cart" EntitySet="Tbl_Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Produ__Categ__286302EC" Association="dbEcommerceModel.FK__Tbl_Produ__Categ__286302EC">
+            <End Role="Tbl_Category" EntitySet="Tbl_Category" />
+            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Shipp__Membe__30F848ED" Association="dbEcommerceModel.FK__Tbl_Shipp__Membe__30F848ED">
+            <End Role="Tbl_Members" EntitySet="Tbl_Members" />
+            <End Role="Tbl_Shipping" EntitySet="Tbl_Shipping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Product_Tbl_Members" Association="dbEcommerceModel.FK_Tbl_Product_Tbl_Members">
+            <End Role="Tbl_Members" EntitySet="Tbl_Members" />
+            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Shipping_Tbl_Members" Association="dbEcommerceModel.FK_Tbl_Shipping_Tbl_Members">
+            <End Role="Tbl_Members" EntitySet="Tbl_Members" />
+            <End Role="Tbl_Shipping" EntitySet="Tbl_Shipping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_Shipping_Tbl_Members1" Association="dbEcommerceModel.FK_Tbl_Shipping_Tbl_Members1">
+            <End Role="Tbl_Members" EntitySet="Tbl_Members" />
+            <End Role="Tbl_Shipping" EntitySet="Tbl_Shipping" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Produ__Produ__3E1D39E1" Association="dbEcommerceModel.FK__Tbl_Produ__Produ__3E1D39E1">
+            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
+            <End Role="Tbl_Product_Characteristics" EntitySet="Tbl_Product_Characteristics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_ShippingDetail_Tbl_Product" Association="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Product">
+            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
+            <End Role="Tbl_ShippingDetail" EntitySet="Tbl_ShippingDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tbl_ShippingDetail_Tbl_Shipping" Association="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Shipping">
+            <End Role="Tbl_Shipping" EntitySet="Tbl_Shipping" />
+            <End Role="Tbl_ShippingDetail" EntitySet="Tbl_ShippingDetail" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="dbEcommerceModel.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="C__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
             <PropertyRef Name="ContextKey" />
           </Key>
-          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="dbEcommerceModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUserClaims">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+          <NavigationProperty Name="AspNetUsers" Relationship="dbEcommerceModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUserLogins">
           <Key>
@@ -439,16 +533,16 @@
             <PropertyRef Name="ProviderKey" />
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="dbEcommerceModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
         </EntityType>
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
           <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -459,16 +553,16 @@
           <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
           <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
           <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
-          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
-          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="dbEcommerceModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="dbEcommerceModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="dbEcommerceModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -523,10 +617,43 @@
           <Property Name="CreatedOn" Type="DateTime" Precision="3" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="Type" Type="Int32" />
-          <NavigationProperty Name="Tbl_Shipping" Relationship="Self.FK__Tbl_Shipp__Membe__30F848ED" FromRole="Tbl_Members" ToRole="Tbl_Shipping" />
-          <NavigationProperty Name="Tbl_Shipping1" Relationship="Self.FK_Tbl_Shipping_Tbl_Members" FromRole="Tbl_Members" ToRole="Tbl_Shipping" />
-          <NavigationProperty Name="Tbl_Shipping2" Relationship="Self.FK_Tbl_Shipping_Tbl_Members1" FromRole="Tbl_Members" ToRole="Tbl_Shipping" />
+          <NavigationProperty Name="Tbl_Shipping" Relationship="dbEcommerceModel.FK__Tbl_Shipp__Membe__30F848ED" FromRole="Tbl_Members" ToRole="Tbl_Shipping" />
           <NavigationProperty Name="Tbl_Product" Relationship="dbEcommerceModel.FK_Tbl_Product_Tbl_Members" FromRole="Tbl_Members" ToRole="Tbl_Product" />
+          <NavigationProperty Name="Tbl_Shipping1" Relationship="dbEcommerceModel.FK_Tbl_Shipping_Tbl_Members" FromRole="Tbl_Members" ToRole="Tbl_Shipping" />
+          <NavigationProperty Name="Tbl_Shipping2" Relationship="dbEcommerceModel.FK_Tbl_Shipping_Tbl_Members1" FromRole="Tbl_Members" ToRole="Tbl_Shipping" />
+        </EntityType>
+        <EntityType Name="Tbl_Product">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="ProductImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsFeatured" Type="Boolean" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="MemberId" Type="Int32" />
+          <Property Name="Existence" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tbl_Cart" Relationship="dbEcommerceModel.FK__Tbl_Cart__Produc__38996AB5" FromRole="Tbl_Product" ToRole="Tbl_Cart" />
+          <NavigationProperty Name="Tbl_Category" Relationship="dbEcommerceModel.FK__Tbl_Produ__Categ__286302EC" FromRole="Tbl_Product" ToRole="Tbl_Category" />
+          <NavigationProperty Name="Tbl_Members" Relationship="dbEcommerceModel.FK_Tbl_Product_Tbl_Members" FromRole="Tbl_Product" ToRole="Tbl_Members" />
+          <NavigationProperty Name="Tbl_Product_Characteristics" Relationship="dbEcommerceModel.FK__Tbl_Produ__Produ__3E1D39E1" FromRole="Tbl_Product" ToRole="Tbl_Product_Characteristics" />
+          <NavigationProperty Name="Tbl_ShippingDetail" Relationship="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Product" FromRole="Tbl_Product" ToRole="Tbl_ShippingDetail" />
+        </EntityType>
+        <EntityType Name="Tbl_Product_Characteristics">
+          <Key>
+            <PropertyRef Name="CharacteristicId" />
+          </Key>
+          <Property Name="CharacteristicId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Characteristic" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Product" Relationship="dbEcommerceModel.FK__Tbl_Produ__Produ__3E1D39E1" FromRole="Tbl_Product_Characteristics" ToRole="Tbl_Product" />
         </EntityType>
         <EntityType Name="Tbl_Roles">
           <Key>
@@ -550,10 +677,10 @@
           <Property Name="MiPymeId" Type="Int32" />
           <Property Name="Status" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Tbl_Members" Relationship="Self.FK__Tbl_Shipp__Membe__30F848ED" FromRole="Tbl_Shipping" ToRole="Tbl_Members" />
-          <NavigationProperty Name="Tbl_Members1" Relationship="Self.FK_Tbl_Shipping_Tbl_Members" FromRole="Tbl_Shipping" ToRole="Tbl_Members" />
-          <NavigationProperty Name="Tbl_Members2" Relationship="Self.FK_Tbl_Shipping_Tbl_Members1" FromRole="Tbl_Shipping" ToRole="Tbl_Members" />
-          <NavigationProperty Name="Tbl_ShippingDetail" Relationship="Self.FK_Tbl_ShippingDetail_Tbl_Shipping" FromRole="Tbl_Shipping" ToRole="Tbl_ShippingDetail" />
+          <NavigationProperty Name="Tbl_Members" Relationship="dbEcommerceModel.FK__Tbl_Shipp__Membe__30F848ED" FromRole="Tbl_Shipping" ToRole="Tbl_Members" />
+          <NavigationProperty Name="Tbl_Members1" Relationship="dbEcommerceModel.FK_Tbl_Shipping_Tbl_Members" FromRole="Tbl_Shipping" ToRole="Tbl_Members" />
+          <NavigationProperty Name="Tbl_Members2" Relationship="dbEcommerceModel.FK_Tbl_Shipping_Tbl_Members1" FromRole="Tbl_Shipping" ToRole="Tbl_Members" />
+          <NavigationProperty Name="Tbl_ShippingDetail" Relationship="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Shipping" FromRole="Tbl_Shipping" ToRole="Tbl_ShippingDetail" />
         </EntityType>
         <EntityType Name="Tbl_ShippingDetail">
           <Key>
@@ -562,9 +689,10 @@
           <Property Name="ShippingDetailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ShippingId" Type="Int32" Nullable="false" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Tbl_Shipping" Relationship="Self.FK_Tbl_ShippingDetail_Tbl_Shipping" FromRole="Tbl_ShippingDetail" ToRole="Tbl_Shipping" />
           <Property Name="Quantity" Type="Int32" />
+          <Property Name="Observation" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Tbl_Product" Relationship="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Product" FromRole="Tbl_ShippingDetail" ToRole="Tbl_Product" />
+          <NavigationProperty Name="Tbl_Shipping" Relationship="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Shipping" FromRole="Tbl_ShippingDetail" ToRole="Tbl_Shipping" />
         </EntityType>
         <EntityType Name="Tbl_SlideImage">
           <Key>
@@ -575,10 +703,10 @@
           <Property Name="SlideImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+          <End Type="dbEcommerceModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <End Type="dbEcommerceModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -589,10 +717,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+          <End Type="dbEcommerceModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
             <OnDelete Action="Cascade" />
           </End>
-          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <End Type="dbEcommerceModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
               <PropertyRef Name="Id" />
@@ -602,142 +730,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Tbl_Shipp__Membe__30F848ED">
-          <End Role="Tbl_Members" Type="Self.Tbl_Members" Multiplicity="0..1" />
-          <End Role="Tbl_Shipping" Type="Self.Tbl_Shipping" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tbl_Members">
-              <PropertyRef Name="MemberId" />
-            </Principal>
-            <Dependent Role="Tbl_Shipping">
-              <PropertyRef Name="MemberId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tbl_Shipping_Tbl_Members">
-          <End Role="Tbl_Members" Type="Self.Tbl_Members" Multiplicity="0..1" />
-          <End Role="Tbl_Shipping" Type="Self.Tbl_Shipping" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tbl_Members">
-              <PropertyRef Name="MemberId" />
-            </Principal>
-            <Dependent Role="Tbl_Shipping">
-              <PropertyRef Name="MemberId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tbl_Shipping_Tbl_Members1">
-          <End Role="Tbl_Members" Type="Self.Tbl_Members" Multiplicity="0..1" />
-          <End Role="Tbl_Shipping" Type="Self.Tbl_Shipping" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tbl_Members">
-              <PropertyRef Name="MemberId" />
-            </Principal>
-            <Dependent Role="Tbl_Shipping">
-              <PropertyRef Name="MiPymeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tbl_ShippingDetail_Tbl_Shipping">
-          <End Role="Tbl_Shipping" Type="Self.Tbl_Shipping" Multiplicity="1" />
-          <End Role="Tbl_ShippingDetail" Type="Self.Tbl_ShippingDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tbl_Shipping">
-              <PropertyRef Name="ShippingId" />
-            </Principal>
-            <Dependent Role="Tbl_ShippingDetail">
-              <PropertyRef Name="ShippingId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="AspNetUserRoles">
-          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="*" />
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="dbEcommerceEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
-          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" />
-          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
-          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
-          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Tbl_Cart" EntityType="Self.Tbl_Cart" />
-          <EntitySet Name="Tbl_CartStatus" EntityType="Self.Tbl_CartStatus" />
-          <EntitySet Name="Tbl_Category" EntityType="Self.Tbl_Category" />
-          <EntitySet Name="Tbl_MemberRole" EntityType="Self.Tbl_MemberRole" />
-          <EntitySet Name="Tbl_Members" EntityType="Self.Tbl_Members" />
-          <EntitySet Name="Tbl_Roles" EntityType="Self.Tbl_Roles" />
-          <EntitySet Name="Tbl_Shipping" EntityType="Self.Tbl_Shipping" />
-          <EntitySet Name="Tbl_ShippingDetail" EntityType="Self.Tbl_ShippingDetail" />
-          <EntitySet Name="Tbl_SlideImage" EntityType="Self.Tbl_SlideImage" />
-          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Shipp__Membe__30F848ED" Association="Self.FK__Tbl_Shipp__Membe__30F848ED">
-            <End Role="Tbl_Members" EntitySet="Tbl_Members" />
-            <End Role="Tbl_Shipping" EntitySet="Tbl_Shipping" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tbl_Shipping_Tbl_Members" Association="Self.FK_Tbl_Shipping_Tbl_Members">
-            <End Role="Tbl_Members" EntitySet="Tbl_Members" />
-            <End Role="Tbl_Shipping" EntitySet="Tbl_Shipping" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tbl_Shipping_Tbl_Members1" Association="Self.FK_Tbl_Shipping_Tbl_Members1">
-            <End Role="Tbl_Members" EntitySet="Tbl_Members" />
-            <End Role="Tbl_Shipping" EntitySet="Tbl_Shipping" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tbl_ShippingDetail_Tbl_Shipping" Association="Self.FK_Tbl_ShippingDetail_Tbl_Shipping">
-            <End Role="Tbl_Shipping" EntitySet="Tbl_Shipping" />
-            <End Role="Tbl_ShippingDetail" EntitySet="Tbl_ShippingDetail" />
-          </AssociationSet>
-          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-          </AssociationSet>
-          <EntitySet Name="Tbl_Product" EntityType="dbEcommerceModel.Tbl_Product" />
-          <AssociationSet Name="FK__Tbl_Cart__Produc__38996AB5" Association="dbEcommerceModel.FK__Tbl_Cart__Produc__38996AB5">
-            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
-            <End Role="Tbl_Cart" EntitySet="Tbl_Cart" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Tbl_Produ__Categ__286302EC" Association="dbEcommerceModel.FK__Tbl_Produ__Categ__286302EC">
-            <End Role="Tbl_Category" EntitySet="Tbl_Category" />
-            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tbl_Product_Tbl_Members" Association="dbEcommerceModel.FK_Tbl_Product_Tbl_Members">
-            <End Role="Tbl_Members" EntitySet="Tbl_Members" />
-            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tbl_ShippingDetail_Tbl_Product" Association="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Product">
-            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
-            <End Role="Tbl_ShippingDetail" EntitySet="Tbl_ShippingDetail" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Tbl_Product">
-          <Key>
-            <PropertyRef Name="ProductId" />
-          </Key>
-          <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="CategoryId" Type="Int32" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="IsDelete" Type="Boolean" />
-          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
-          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
-          <Property Name="ProductImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="IsFeatured" Type="Boolean" />
-          <Property Name="Quantity" Type="Int32" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="MemberId" Type="Int32" />
-          <Property Name="Existence" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Tbl_Cart" Relationship="dbEcommerceModel.FK__Tbl_Cart__Produc__38996AB5" FromRole="Tbl_Product" ToRole="Tbl_Cart" />
-          <NavigationProperty Name="Tbl_Category" Relationship="dbEcommerceModel.FK__Tbl_Produ__Categ__286302EC" FromRole="Tbl_Product" ToRole="Tbl_Category" />
-          <NavigationProperty Name="Tbl_Members" Relationship="dbEcommerceModel.FK_Tbl_Product_Tbl_Members" FromRole="Tbl_Product" ToRole="Tbl_Members" />
-          <NavigationProperty Name="Tbl_ShippingDetail" Relationship="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Product" FromRole="Tbl_Product" ToRole="Tbl_ShippingDetail" />
-        </EntityType>
         <Association Name="FK__Tbl_Cart__Produc__38996AB5">
           <End Type="dbEcommerceModel.Tbl_Product" Role="Tbl_Product" Multiplicity="0..1" />
           <End Type="dbEcommerceModel.Tbl_Cart" Role="Tbl_Cart" Multiplicity="*" />
@@ -762,6 +754,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Tbl_Shipp__Membe__30F848ED">
+          <End Type="dbEcommerceModel.Tbl_Members" Role="Tbl_Members" Multiplicity="0..1" />
+          <End Type="dbEcommerceModel.Tbl_Shipping" Role="Tbl_Shipping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Members">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Tbl_Shipping">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tbl_Product_Tbl_Members">
           <End Type="dbEcommerceModel.Tbl_Members" Role="Tbl_Members" Multiplicity="0..1" />
           <End Type="dbEcommerceModel.Tbl_Product" Role="Tbl_Product" Multiplicity="*" />
@@ -771,6 +775,42 @@
             </Principal>
             <Dependent Role="Tbl_Product">
               <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Shipping_Tbl_Members">
+          <End Type="dbEcommerceModel.Tbl_Members" Role="Tbl_Members" Multiplicity="0..1" />
+          <End Type="dbEcommerceModel.Tbl_Shipping" Role="Tbl_Shipping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Members">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Tbl_Shipping">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tbl_Shipping_Tbl_Members1">
+          <End Type="dbEcommerceModel.Tbl_Members" Role="Tbl_Members" Multiplicity="0..1" />
+          <End Type="dbEcommerceModel.Tbl_Shipping" Role="Tbl_Shipping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Members">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Tbl_Shipping">
+              <PropertyRef Name="MiPymeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Produ__Produ__3E1D39E1">
+          <End Type="dbEcommerceModel.Tbl_Product" Role="Tbl_Product" Multiplicity="1" />
+          <End Type="dbEcommerceModel.Tbl_Product_Characteristics" Role="Tbl_Product_Characteristics" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Tbl_Product_Characteristics">
+              <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -786,6 +826,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tbl_ShippingDetail_Tbl_Shipping">
+          <End Type="dbEcommerceModel.Tbl_Shipping" Role="Tbl_Shipping" Multiplicity="1" />
+          <End Type="dbEcommerceModel.Tbl_ShippingDetail" Role="Tbl_ShippingDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Shipping">
+              <PropertyRef Name="ShippingId" />
+            </Principal>
+            <Dependent Role="Tbl_ShippingDetail">
+              <PropertyRef Name="ShippingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="dbEcommerceModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="dbEcommerceModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -795,177 +851,126 @@
           <EntitySetMapping Name="C__MigrationHistory">
             <EntityTypeMapping TypeName="dbEcommerceModel.C__MigrationHistory">
               <MappingFragment StoreEntitySet="__MigrationHistory">
-                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
                 <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetRoles">
             <EntityTypeMapping TypeName="dbEcommerceModel.AspNetRoles">
               <MappingFragment StoreEntitySet="AspNetRoles">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserClaims">
             <EntityTypeMapping TypeName="dbEcommerceModel.AspNetUserClaims">
               <MappingFragment StoreEntitySet="AspNetUserClaims">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
                 <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUserLogins">
             <EntityTypeMapping TypeName="dbEcommerceModel.AspNetUserLogins">
               <MappingFragment StoreEntitySet="AspNetUserLogins">
-                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="dbEcommerceModel.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="dbEcommerceModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tbl_Cart">
             <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_Cart">
               <MappingFragment StoreEntitySet="Tbl_Cart">
-                <ScalarProperty Name="CartId" ColumnName="CartId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
                 <ScalarProperty Name="CartStatusId" ColumnName="CartStatusId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CartId" ColumnName="CartId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tbl_CartStatus">
             <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_CartStatus">
               <MappingFragment StoreEntitySet="Tbl_CartStatus">
-                <ScalarProperty Name="CartStatusId" ColumnName="CartStatusId" />
                 <ScalarProperty Name="CartStatus" ColumnName="CartStatus" />
+                <ScalarProperty Name="CartStatusId" ColumnName="CartStatusId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tbl_Category">
             <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_Category">
               <MappingFragment StoreEntitySet="Tbl_Category">
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tbl_MemberRole">
             <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_MemberRole">
               <MappingFragment StoreEntitySet="Tbl_MemberRole">
-                <ScalarProperty Name="MemberRoleId" ColumnName="MemberRoleId" />
-                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="MemberRoleId" ColumnName="MemberRoleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Tbl_Members">
             <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_Members">
               <MappingFragment StoreEntitySet="Tbl_Members">
-                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tbl_Roles">
-            <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_Roles">
-              <MappingFragment StoreEntitySet="Tbl_Roles">
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tbl_Shipping">
-            <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_Shipping">
-              <MappingFragment StoreEntitySet="Tbl_Shipping">
-                <ScalarProperty Name="ShippingId" ColumnName="ShippingId" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="MemberId" ColumnName="MemberId" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
-                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
-                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
-                <ScalarProperty Name="MiPymeId" ColumnName="MiPymeId" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Tbl_ShippingDetail">
-            <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_ShippingDetail">
-              <MappingFragment StoreEntitySet="Tbl_ShippingDetail">
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="ShippingDetailId" ColumnName="ShippingDetailId" />
-                <ScalarProperty Name="ShippingId" ColumnName="ShippingId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tbl_SlideImage">
-            <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_SlideImage">
-              <MappingFragment StoreEntitySet="Tbl_SlideImage">
-                <ScalarProperty Name="SlideId" ColumnName="SlideId" />
-                <ScalarProperty Name="SlideTittle" ColumnName="SlideTittle" />
-                <ScalarProperty Name="SlideImage" ColumnName="SlideImage" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="AspNetUserRoles" TypeName="dbEcommerceModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-            <EndProperty Name="AspNetRoles">
-              <ScalarProperty Name="Id" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="AspNetUsers">
-              <ScalarProperty Name="Id" ColumnName="UserId" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="Tbl_Product">
             <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_Product">
               <MappingFragment StoreEntitySet="Tbl_Product">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Existence" ColumnName="Existence" />
                 <ScalarProperty Name="MemberId" ColumnName="MemberId" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
@@ -982,6 +987,68 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Product_Characteristics">
+            <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_Product_Characteristics">
+              <MappingFragment StoreEntitySet="Tbl_Product_Characteristics">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Characteristic" ColumnName="Characteristic" />
+                <ScalarProperty Name="CharacteristicId" ColumnName="CharacteristicId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Roles">
+            <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_Roles">
+              <MappingFragment StoreEntitySet="Tbl_Roles">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_Shipping">
+            <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_Shipping">
+              <MappingFragment StoreEntitySet="Tbl_Shipping">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="MiPymeId" ColumnName="MiPymeId" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="ShippingId" ColumnName="ShippingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_ShippingDetail">
+            <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_ShippingDetail">
+              <MappingFragment StoreEntitySet="Tbl_ShippingDetail">
+                <ScalarProperty Name="Observation" ColumnName="Observation" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ShippingId" ColumnName="ShippingId" />
+                <ScalarProperty Name="ShippingDetailId" ColumnName="ShippingDetailId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tbl_SlideImage">
+            <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_SlideImage">
+              <MappingFragment StoreEntitySet="Tbl_SlideImage">
+                <ScalarProperty Name="SlideImage" ColumnName="SlideImage" />
+                <ScalarProperty Name="SlideTittle" ColumnName="SlideTittle" />
+                <ScalarProperty Name="SlideId" ColumnName="SlideId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="dbEcommerceModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -18,6 +18,7 @@ namespace Ecommerce.DAL
         public Tbl_Product()
         {
             this.Tbl_Cart = new HashSet<Tbl_Cart>();
+            this.Tbl_Product_Characteristics = new HashSet<Tbl_Product_Characteristics>();
             this.Tbl_ShippingDetail = new HashSet<Tbl_ShippingDetail>();
         }
     
@@ -34,11 +35,14 @@ namespace Ecommerce.DAL
         public Nullable<decimal> Price { get; set; }
         public Nullable<int> MemberId { get; set; }
         public int Existence { get; set; }
+        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_Cart> Tbl_Cart { get; set; }
         public virtual Tbl_Category Tbl_Category { get; set; }
         public virtual Tbl_Members Tbl_Members { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tbl_Product_Characteristics> Tbl_Product_Characteristics { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tbl_ShippingDetail> Tbl_ShippingDetail { get; set; }
     }

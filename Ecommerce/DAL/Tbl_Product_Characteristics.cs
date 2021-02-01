@@ -12,15 +12,12 @@ namespace Ecommerce.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Tbl_ShippingDetail
+    public partial class Tbl_Product_Characteristics
     {
-        public int ShippingDetailId { get; set; }
-        public int ShippingId { get; set; }
+        public int CharacteristicId { get; set; }
+        public string Characteristic { get; set; }
         public int ProductId { get; set; }
-        public Nullable<int> Quantity { get; set; }
-        public string Observation { get; set; }
     
         public virtual Tbl_Product Tbl_Product { get; set; }
-        public virtual Tbl_Shipping Tbl_Shipping { get; set; }
     }
 }
