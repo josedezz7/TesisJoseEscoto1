@@ -12,12 +12,14 @@ namespace Ecommerce.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class AspNetUserLogins
+    public partial class Tbl_Product_Reviews
     {
-        public string LoginProvider { get; set; }
-        public string ProviderKey { get; set; }
-        public string UserId { get; set; }
+        public int ReviewId { get; set; }
+        public Nullable<int> Rating { get; set; }
+        public string Reviewer { get; set; }
+        public string Comment { get; set; }
+        public int ProductId { get; set; }
     
-        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual Tbl_Product Tbl_Product { get; set; }
     }
 }

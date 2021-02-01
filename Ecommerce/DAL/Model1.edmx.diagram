@@ -34,6 +34,8 @@
         <AssociationConnector Association="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Product" />
         <AssociationConnector Association="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Shipping" />
         <AssociationConnector Association="dbEcommerceModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Product_Reviews" Width="1.5" PointX="5.25" PointY="15" />
+        <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Produ__Produ__4E53A1AA" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

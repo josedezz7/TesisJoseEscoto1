@@ -151,6 +151,19 @@
           <Property Name="Characteristic" Type="varchar" MaxLength="255" />
           <Property Name="ProductId" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'dbEcommerce.dbo.Tbl_Product_Reviews' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Tbl_Product_Reviews">
+          <Key>
+            <PropertyRef Name="ReviewId" />
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ReviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="Reviewer" Type="varchar" MaxLength="100" />
+          <Property Name="Comment" Type="varchar" MaxLength="500" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Tbl_Roles">
           <Key>
             <PropertyRef Name="RoleId" />
@@ -224,6 +237,18 @@
               <PropertyRef Name="ProductId" />
             </Principal>
             <Dependent Role="Tbl_Product_Characteristics">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tbl_Produ__Produ__4E53A1AA">
+          <End Role="Tbl_Product" Type="Self.Tbl_Product" Multiplicity="1" />
+          <End Role="Tbl_Product_Reviews" Type="Self.Tbl_Product_Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Tbl_Product_Reviews">
               <PropertyRef Name="ProductId" />
             </Dependent>
           </ReferentialConstraint>
@@ -375,6 +400,15 @@
           <EntitySet Name="Tbl_Shipping" EntityType="Self.Tbl_Shipping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_ShippingDetail" EntityType="Self.Tbl_ShippingDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_SlideImage" EntityType="Self.Tbl_SlideImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Product_Reviews" EntityType="Self.Tbl_Product_Reviews" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Tbl_Product_Reviews].[ReviewId] AS [ReviewId], 
+    [Tbl_Product_Reviews].[Rating] AS [Rating], 
+    [Tbl_Product_Reviews].[Reviewer] AS [Reviewer], 
+    [Tbl_Product_Reviews].[Comment] AS [Comment], 
+    [Tbl_Product_Reviews].[ProductId] AS [ProductId]
+    FROM [dbo].[Tbl_Product_Reviews] AS [Tbl_Product_Reviews]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__Tbl_Cart__Produc__38996AB5" Association="Self.FK__Tbl_Cart__Produc__38996AB5">
             <End Role="Tbl_Product" EntitySet="Tbl_Product" />
             <End Role="Tbl_Cart" EntitySet="Tbl_Cart" />
@@ -386,6 +420,10 @@
           <AssociationSet Name="FK__Tbl_Produ__Produ__3E1D39E1" Association="Self.FK__Tbl_Produ__Produ__3E1D39E1">
             <End Role="Tbl_Product" EntitySet="Tbl_Product" />
             <End Role="Tbl_Product_Characteristics" EntitySet="Tbl_Product_Characteristics" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tbl_Produ__Produ__4E53A1AA" Association="Self.FK__Tbl_Produ__Produ__4E53A1AA">
+            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
+            <End Role="Tbl_Product_Reviews" EntitySet="Tbl_Product_Reviews" />
           </AssociationSet>
           <AssociationSet Name="FK__Tbl_Shipp__Membe__30F848ED" Association="Self.FK__Tbl_Shipp__Membe__30F848ED">
             <End Role="Tbl_Members" EntitySet="Tbl_Members" />
@@ -497,6 +535,11 @@
           <AssociationSet Name="AspNetUserRoles" Association="dbEcommerceModel.AspNetUserRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <EntitySet Name="Tbl_Product_Reviews" EntityType="dbEcommerceModel.Tbl_Product_Reviews" />
+          <AssociationSet Name="FK__Tbl_Produ__Produ__4E53A1AA" Association="dbEcommerceModel.FK__Tbl_Produ__Produ__4E53A1AA">
+            <End Role="Tbl_Product" EntitySet="Tbl_Product" />
+            <End Role="Tbl_Product_Reviews" EntitySet="Tbl_Product_Reviews" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="C__MigrationHistory">
@@ -645,6 +688,7 @@
           <NavigationProperty Name="Tbl_Members" Relationship="dbEcommerceModel.FK_Tbl_Product_Tbl_Members" FromRole="Tbl_Product" ToRole="Tbl_Members" />
           <NavigationProperty Name="Tbl_Product_Characteristics" Relationship="dbEcommerceModel.FK__Tbl_Produ__Produ__3E1D39E1" FromRole="Tbl_Product" ToRole="Tbl_Product_Characteristics" />
           <NavigationProperty Name="Tbl_ShippingDetail" Relationship="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Product" FromRole="Tbl_Product" ToRole="Tbl_ShippingDetail" />
+          <NavigationProperty Name="Tbl_Product_Reviews" Relationship="dbEcommerceModel.FK__Tbl_Produ__Produ__4E53A1AA" FromRole="Tbl_Product" ToRole="Tbl_Product_Reviews" />
         </EntityType>
         <EntityType Name="Tbl_Product_Characteristics">
           <Key>
@@ -841,6 +885,30 @@
         <Association Name="AspNetUserRoles">
           <End Type="dbEcommerceModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="dbEcommerceModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Tbl_Product_Reviews">
+          <Key>
+            <PropertyRef Name="ReviewId" />
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ReviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rating" Type="Int32" />
+          <Property Name="Reviewer" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tbl_Product" Relationship="dbEcommerceModel.FK__Tbl_Produ__Produ__4E53A1AA" FromRole="Tbl_Product_Reviews" ToRole="Tbl_Product" />
+        </EntityType>
+        <Association Name="FK__Tbl_Produ__Produ__4E53A1AA">
+          <End Type="dbEcommerceModel.Tbl_Product" Role="Tbl_Product" Multiplicity="1" />
+          <End Type="dbEcommerceModel.Tbl_Product_Reviews" Role="Tbl_Product_Reviews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tbl_Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="Tbl_Product_Reviews">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1049,6 +1117,17 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Tbl_Product_Reviews">
+            <EntityTypeMapping TypeName="dbEcommerceModel.Tbl_Product_Reviews">
+              <MappingFragment StoreEntitySet="Tbl_Product_Reviews">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Reviewer" ColumnName="Reviewer" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="ReviewId" ColumnName="ReviewId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

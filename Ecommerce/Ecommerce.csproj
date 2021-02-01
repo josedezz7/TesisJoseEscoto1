@@ -239,6 +239,9 @@
     <Compile Include="DAL\Tbl_Product_Characteristics.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Tbl_Product_Reviews.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Tbl_Roles.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
