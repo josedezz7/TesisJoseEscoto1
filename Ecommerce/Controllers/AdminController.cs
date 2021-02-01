@@ -147,6 +147,7 @@ namespace Ecommerce.Controllers
             producto.Quantity = tbl.Quantity;
             producto.Price = tbl.Price;
             producto.Existence = tbl.Existence;
+            producto.Description = tbl.Description;
             string pic = null;
             if (file != null)
             {
