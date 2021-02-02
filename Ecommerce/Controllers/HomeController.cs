@@ -8,6 +8,7 @@ using Ecommerce.DAL;
 using Ecommerce.Models;
 using Ecommerce.Repository;
 using Ecommerce.Models.Home;
+using Ecommerce.Models.Products;
 
 namespace Ecommerce.Controllers
 {
@@ -115,7 +116,11 @@ namespace Ecommerce.Controllers
 
         public ActionResult ViewProductDetail(int productId)
         {
-            var model = _unitOfWork.GetRepositoryInstance<Tbl_Product>().getFirstorDefault(productId);
+            var model = new ProductsDetailsComment
+            {
+                product = _unitOfWork.GetRepositoryInstance<Tbl_Product>().getFirstorDefault(productId)
+            };
+                
             return View(model);
         }
             public ActionResult RemoveFromCart(int productId)

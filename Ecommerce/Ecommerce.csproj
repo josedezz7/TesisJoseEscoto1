@@ -265,6 +265,7 @@
     <Compile Include="Models\Home\OrderViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Products\ProductsDetailsComment.cs" />
     <Compile Include="Models\RegisterMiPymeViewModel.cs" />
     <Compile Include="Models\Shopping.cs" />
     <Compile Include="Models\StockXItemViewModel.cs" />

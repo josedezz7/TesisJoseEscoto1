@@ -1,4 +1,4 @@
-﻿@model Ecommerce.DAL.Tbl_Product
+﻿@model Ecommerce.Models.Products.ProductsDetailsComment
 @{
     ViewBag.Title = "ViewProductDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,13 +8,13 @@
     <div class="panel panel-default">
         <div class="panel-heading">Detalle del producto</div>
         <div class="text-center rounded mb-7">
-            <img src="~/ProductImages/@Model.ProductImage" class="mw-100 h-150px" />
+            <img src="~/ProductImages/@Model.product.ProductImage" class="mw-100 h-150px" />
         </div>
         <ul class="list-group">
-            <li class="list-group-item">Nombre del producto: @Model.ProductName</li>
-            <li class="list-group-item">Categoria: @Model.Tbl_Category.CategoryName </li>
-            <li class="list-group-item">Precio: @Model.Price</li>
-            <li class="list-group-item">Descripcion del producto: @Model.Description</li>
+            <li class="list-group-item">Nombre del producto: @Model.product.ProductName</li>
+            <li class="list-group-item">Categoria: @Model.product.Tbl_Category.CategoryName </li>
+            <li class="list-group-item">Precio: @Model.product.Price</li>
+            <li class="list-group-item">Descripcion del producto: @Model.product.Description</li>
         </ul>
 
     </div>
@@ -29,13 +29,12 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-
                         </tr>
                     </thead>
                     <tbody>
                         @{
 
-                            foreach (var item in Model.Tbl_Product_Characteristics)
+                            foreach (var item in Model.product.Tbl_Product_Characteristics)
                             {
 
                                 <tr>
@@ -51,5 +50,45 @@
 
         </div>
     </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+            Comentarios
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header">
+                
+        </div>
+    </div>
+
+    
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="media g-mb-30 media-comment">
+                        <div class="media-body u-shadow-v18 g-bg-secondary g-pa-30">
+                            <div class="g-mb-15">
+                                <h5 class="h5 g-color-gray-dark-v1 mb-0">John Doe</h5>
+                                @*<span class="g-color-gray-dark-v4 g-font-size-12">5 days ago</span>*@
+                            </div>
+
+                            <p>
+                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue
+                                felis in faucibus ras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
 
 
