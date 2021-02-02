@@ -3751,7 +3751,6 @@
     <Content Include="Views\Admin\ProductCharacteristicEdit.cshtml" />
     <Content Include="Views\Admin\CharacteristicAdd.cshtml" />
     <Content Include="Views\Home\ViewProductDetail.cshtml" />
-    <Content Include="Views\Shared\_Zoom.cshtml" />
     <Content Include="Views\Home\Zoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
