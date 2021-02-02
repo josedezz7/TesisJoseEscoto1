@@ -151,8 +151,8 @@
           <Property Name="Characteristic" Type="varchar" MaxLength="255" />
           <Property Name="ProductId" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6002: La tabla o vista 'dbEcommerce.dbo.Tbl_Product_Reviews' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dbEcommerce.dbo.Tbl_Product_Reviews' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Tbl_Product_Reviews">
           <Key>
             <PropertyRef Name="ReviewId" />

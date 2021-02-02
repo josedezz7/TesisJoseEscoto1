@@ -118,7 +118,10 @@ namespace Ecommerce.Controllers
         {
             var model = new ProductsDetailsComment
             {
-                product = _unitOfWork.GetRepositoryInstance<Tbl_Product>().getFirstorDefault(productId)
+                product = _unitOfWork.GetRepositoryInstance<Tbl_Product>().getFirstorDefault(productId),
+                reviews = _unitOfWork.GetRepositoryInstance<Tbl_Product_Reviews>()
+                                        .GetAllRecord()
+                                        .Where(r => r.ProductId == productId).ToList()
             };
                 
             return View(model);
@@ -138,5 +141,13 @@ namespace Ecommerce.Controllers
                 return Redirect("Index");
             }
 
+        [HttpPost]
+        public ActionResult AddComment(ProductsDetailsComment tbl)
+        {
+            tbl.review.ProductId = tbl.product.ProductId;
+            _unitOfWork.GetRepositoryInstance<Tbl_Product_Reviews>().Add(tbl.review);
+            return RedirectToAction("ViewProductDetail", new { @productId = tbl.product.ProductId });
         }
+
+    }
 }
