@@ -104,12 +104,11 @@
         </div>
     </div>
 
-    <div class="card mb-3">
-        <div class="card-header">
-            Comentarios
-            @foreach (var item in Model.reviews)
-            {
 
+    @foreach (var item in Model.reviews)
+    {
+        <div class="card mb-3">
+            <div class="card-header">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="media g-mb-30 media-comment">
@@ -125,10 +124,10 @@
                         </div>
                     </div>
                 </div>
-
-            }
+            </div>
         </div>
-    </div>
+    }
+
 
 
 </div>

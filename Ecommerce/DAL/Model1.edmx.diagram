@@ -11,16 +11,16 @@
         <EntityTypeShape EntityType="dbEcommerceModel.AspNetUserLogins" Width="1.5" PointX="12.25" PointY="1" />
         <EntityTypeShape EntityType="dbEcommerceModel.AspNetUsers" Width="1.5" PointX="10" PointY="1.375" />
         <EntityTypeShape EntityType="dbEcommerceModel.sysdiagrams" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Cart" Width="1.5" PointX="5.25" PointY="11.25" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Cart" Width="1.5" PointX="5.25" PointY="6.625" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_CartStatus" Width="1.5" PointX="7.75" PointY="6.75" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Category" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Category" Width="1.5" PointX="0.75" PointY="2.5" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_MemberRole" Width="1.5" PointX="9.75" PointY="6.75" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Members" Width="1.5" PointX="0.75" PointY="4.125" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Product" Width="1.5" PointX="3" PointY="3.625" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Product_Characteristics" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Members" Width="1.5" PointX="0.75" PointY="5.625" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Product" Width="1.5" PointX="3" PointY="5" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Product_Characteristics" Width="1.5" PointX="5.25" PointY="13.375" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Roles" Width="1.5" PointX="7.75" PointY="9.75" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Shipping" Width="1.5" PointX="3" PointY="9.375" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_ShippingDetail" Width="1.5" PointX="5.25" PointY="7.25" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Shipping" Width="1.5" PointX="3" PointY="13.75" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_ShippingDetail" Width="1.5" PointX="5.25" PointY="10.125" />
         <EntityTypeShape EntityType="dbEcommerceModel.Tbl_SlideImage" Width="1.5" PointX="9.75" PointY="9.75" />
         <AssociationConnector Association="dbEcommerceModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
         <AssociationConnector Association="dbEcommerceModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
@@ -34,7 +34,7 @@
         <AssociationConnector Association="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Product" />
         <AssociationConnector Association="dbEcommerceModel.FK_Tbl_ShippingDetail_Tbl_Shipping" />
         <AssociationConnector Association="dbEcommerceModel.AspNetUserRoles" />
-        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Product_Reviews" Width="1.5" PointX="5.25" PointY="15" />
+        <EntityTypeShape EntityType="dbEcommerceModel.Tbl_Product_Reviews" Width="1.5" PointX="5.25" PointY="16.375" />
         <AssociationConnector Association="dbEcommerceModel.FK__Tbl_Produ__Produ__4E53A1AA" />
       </Diagram>
     </edmx:Diagrams>

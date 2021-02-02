@@ -151,12 +151,9 @@
           <Property Name="Characteristic" Type="varchar" MaxLength="255" />
           <Property Name="ProductId" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'dbEcommerce.dbo.Tbl_Product_Reviews' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Tbl_Product_Reviews">
           <Key>
             <PropertyRef Name="ReviewId" />
-            <PropertyRef Name="ProductId" />
           </Key>
           <Property Name="ReviewId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Rating" Type="int" />
@@ -396,19 +393,11 @@ warning 6002: The table/view 'dbEcommerce.dbo.Tbl_Product_Reviews' does not have
           <EntitySet Name="Tbl_Members" EntityType="Self.Tbl_Members" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Product" EntityType="Self.Tbl_Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Product_Characteristics" EntityType="Self.Tbl_Product_Characteristics" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tbl_Product_Reviews" EntityType="Self.Tbl_Product_Reviews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Roles" EntityType="Self.Tbl_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_Shipping" EntityType="Self.Tbl_Shipping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_ShippingDetail" EntityType="Self.Tbl_ShippingDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tbl_SlideImage" EntityType="Self.Tbl_SlideImage" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Tbl_Product_Reviews" EntityType="Self.Tbl_Product_Reviews" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Tbl_Product_Reviews].[ReviewId] AS [ReviewId], 
-    [Tbl_Product_Reviews].[Rating] AS [Rating], 
-    [Tbl_Product_Reviews].[Reviewer] AS [Reviewer], 
-    [Tbl_Product_Reviews].[Comment] AS [Comment], 
-    [Tbl_Product_Reviews].[ProductId] AS [ProductId]
-    FROM [dbo].[Tbl_Product_Reviews] AS [Tbl_Product_Reviews]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK__Tbl_Cart__Produc__38996AB5" Association="Self.FK__Tbl_Cart__Produc__38996AB5">
             <End Role="Tbl_Product" EntitySet="Tbl_Product" />
             <End Role="Tbl_Cart" EntitySet="Tbl_Cart" />
@@ -889,7 +878,6 @@ warning 6002: The table/view 'dbEcommerce.dbo.Tbl_Product_Reviews' does not have
         <EntityType Name="Tbl_Product_Reviews">
           <Key>
             <PropertyRef Name="ReviewId" />
-            <PropertyRef Name="ProductId" />
           </Key>
           <Property Name="ReviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Rating" Type="Int32" />
@@ -910,7 +898,7 @@ warning 6002: The table/view 'dbEcommerce.dbo.Tbl_Product_Reviews' does not have
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
