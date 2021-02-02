@@ -149,5 +149,10 @@ namespace Ecommerce.Controllers
             return RedirectToAction("ViewProductDetail", new { @productId = tbl.product.ProductId });
         }
 
+        public ActionResult Zoom()
+        {
+            return PartialView();
+        }
+
     }
 }
